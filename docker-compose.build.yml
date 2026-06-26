@@ -1,20 +1,13 @@
-# Portainer — PULL ONLY (no build). Use after publishing images to Docker Hub.
-#
-# Portainer → Stacks → Add stack → Repository
-#   URL: https://github.com/CarShyne/beszel.Ana
-#   Compose path: docker-compose.portainer.yml
-#
-# Publish images first (on Mac):
-#   ./scripts/publish-anarchy-pulse-arm64.sh
-#
-# Do NOT use Web editor with a pasted compose — that has no source tree to build.
-# If images are not on Hub yet, SSH to the Pi and run:
-#   bash scripts/opm-install.sh
+# Build from a FULL git clone on the host (SSH on opm — not Portainer Web editor).
+# Run: docker compose -f docker-compose.build.yml up -d --build
+# Or:  bash scripts/opm-install.sh
 
 services:
   anarchy-pulse:
-    image: jt7777/anarchy-pulse:latest
-    pull_policy: always
+    build:
+      context: .
+      dockerfile: internal/dockerfile_hub
+    image: jt7777/anarchy-pulse:local
     container_name: anarchy-pulse
     restart: unless-stopped
     environment:
@@ -26,8 +19,10 @@ services:
       - ./anarchy_pulse_socket:/anarchy_pulse_socket
 
   anarchy-pulse-agent:
-    image: jt7777/anarchy-pulse-agent:latest
-    pull_policy: always
+    build:
+      context: .
+      dockerfile: internal/dockerfile_agent_alpine
+    image: jt7777/anarchy-pulse-agent:local
     container_name: anarchy-pulse-agent
     restart: unless-stopped
     network_mode: host
