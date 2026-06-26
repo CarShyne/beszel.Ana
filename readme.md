@@ -28,30 +28,28 @@ Anarchy Pulse consists of two main components: the **hub** and the **agent**.
 
 ## Getting started
 
-### Portainer (Raspberry Pi / NAS) — recommended first deploy
+### Portainer (Raspberry Pi / NAS)
 
-The `jt7777/anarchy-pulse` image is **not on Docker Hub until you publish it**. Until then, build from the GitHub repo in Portainer:
+**Why you saw `lstat .../internal: no such file`:** Portainer **Web editor** only saves the compose YAML to `/data/compose/<id>/` — not the full GitHub repo. There is no `internal/` folder to build from.
 
-1. **Stacks** → **Add stack** → **Repository**
-2. Repository URL: `https://github.com/CarShyne/beszel.Ana`
-3. Compose path: **`docker-compose.portainer.yml`**
-4. Deploy (first build on Pi takes ~10–20 minutes)
+**Option A — Build on the Pi via SSH (works now, no Hub needed):**
 
-Open hub UI: `http://opm:8090` (or your host IP).
+```bash
+ssh opm
+curl -fsSL https://raw.githubusercontent.com/CarShyne/beszel.Ana/main/scripts/opm-install.sh | bash
+```
 
-### Publish images to Docker Hub (then pull works)
-
-On your Mac with Docker Desktop:
+**Option B — Publish from Mac, then pull in Portainer:**
 
 ```bash
 docker login
-cd ~/Projects/Anarchy-Pulse
-./scripts/publish-anarchy-pulse-arm64.sh   # Pi / arm64
-# or
-./scripts/publish-anarchy-pulse.sh         # amd64 + arm64
+cd ~/Projects/Anarchy-Pulse && git pull
+./scripts/publish-anarchy-pulse-arm64.sh
 ```
 
-Then Portainer → **Pull and redeploy** any stack using `jt7777/anarchy-pulse:latest`.
+Portainer → **Stacks** → **Repository** (not Web editor) → compose path **`docker-compose.portainer.yml`**
+
+Open hub UI: `http://opm:8090`
 
 ### Docker Desktop (local)
 
