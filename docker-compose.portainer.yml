@@ -19,6 +19,9 @@ services:
     restart: unless-stopped
     environment:
       APP_URL: http://localhost:8090
+      # Optional first admin (only applied on a fresh data volume):
+      # ANARCHY_PULSE_HUB_USER_EMAIL: admin@yourdomain.com
+      # ANARCHY_PULSE_HUB_USER_PASSWORD: your-secure-password
     ports:
       - "8090:8090"
     volumes:

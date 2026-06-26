@@ -86,11 +86,21 @@ func (h *Hub) registerMiddlewares(se *core.ServeEvent) {
 
 // registerApiRoutes registers custom API routes
 func (h *Hub) registerApiRoutes(se *core.ServeEvent) error {
+	// Legacy /api/beszel alias keeps older embedded UI working until images are rebuilt.
+	for _, prefix := range []string{"/api/anarchy-pulse", "/api/beszel"} {
+		if err := h.registerApiRoutesOn(se, prefix); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (h *Hub) registerApiRoutesOn(se *core.ServeEvent, prefix string) error {
 	// auth protected routes
-	apiAuth := se.Router.Group("/api/anarchy-pulse")
+	apiAuth := se.Router.Group(prefix)
 	apiAuth.Bind(apis.RequireAuth())
 	// auth optional routes
-	apiNoAuth := se.Router.Group("/api/anarchy-pulse")
+	apiNoAuth := se.Router.Group(prefix)
 
 	// create first user endpoint only needed if no users exist
 	if totalUsers, _ := se.App.CountRecords("users"); totalUsers == 0 {
