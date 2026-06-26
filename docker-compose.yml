@@ -1,27 +1,41 @@
+# Local Docker Desktop — pulls from Hub after publish, or builds locally.
+# Pi/Portainer: use docker-compose.portainer.yml instead.
+
 services:
   anarchy-pulse:
     image: jt7777/anarchy-pulse:latest
-    # Alternative: build from internal/dockerfile_hub
-    # build:
-    #   context: .
-    #   dockerfile: internal/dockerfile_hub
+    build:
+      context: .
+      dockerfile: internal/dockerfile_hub
     container_name: anarchy-pulse
     restart: unless-stopped
+    environment:
+      APP_URL: http://localhost:8090
     ports:
       - "8090:8090"
     volumes:
       - anarchy_pulse_data:/anarchy_pulse_data
+      - anarchy_pulse_socket:/anarchy_pulse_socket
 
   anarchy-pulse-agent:
     image: jt7777/anarchy-pulse-agent:latest
+    build:
+      context: .
+      dockerfile: internal/dockerfile_agent_alpine
     container_name: anarchy-pulse-agent
     restart: unless-stopped
-    depends_on:
-      - anarchy-pulse
+    network_mode: host
+    volumes:
+      - anarchy_pulse_agent_data:/var/lib/anarchy-pulse-agent
+      - anarchy_pulse_socket:/anarchy_pulse_socket
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      HUB_URL: http://anarchy-pulse:8090
+      LISTEN: /anarchy_pulse_socket/anarchy-pulse.sock
+      HUB_URL: http://localhost:8090
       TOKEN: ${TOKEN:-}
       KEY: ${KEY:-}
 
 volumes:
   anarchy_pulse_data:
+  anarchy_pulse_agent_data:
+  anarchy_pulse_socket:

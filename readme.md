@@ -28,10 +28,35 @@ Anarchy Pulse consists of two main components: the **hub** and the **agent**.
 
 ## Getting started
 
-Use the root `docker-compose.yml` with Docker Desktop, or see the [Anarchy Pulse repository](https://github.com/CarShyne/beszel.Ana) for build and deployment options.
+### Portainer (Raspberry Pi / NAS) — recommended first deploy
+
+The `jt7777/anarchy-pulse` image is **not on Docker Hub until you publish it**. Until then, build from the GitHub repo in Portainer:
+
+1. **Stacks** → **Add stack** → **Repository**
+2. Repository URL: `https://github.com/CarShyne/beszel.Ana`
+3. Compose path: **`docker-compose.portainer.yml`**
+4. Deploy (first build on Pi takes ~10–20 minutes)
+
+Open hub UI: `http://opm:8090` (or your host IP).
+
+### Publish images to Docker Hub (then pull works)
+
+On your Mac with Docker Desktop:
 
 ```bash
-docker compose up -d
+docker login
+cd ~/Projects/Anarchy-Pulse
+./scripts/publish-anarchy-pulse-arm64.sh   # Pi / arm64
+# or
+./scripts/publish-anarchy-pulse.sh         # amd64 + arm64
+```
+
+Then Portainer → **Pull and redeploy** any stack using `jt7777/anarchy-pulse:latest`.
+
+### Docker Desktop (local)
+
+```bash
+docker compose up -d --build
 ```
 
 Hub UI: [http://localhost:8090](http://localhost:8090)
