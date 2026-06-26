@@ -1,18 +1,18 @@
-# Portainer on Raspberry Pi / NAS — build from repo (no Docker Hub pull required)
+# Portainer — BUILD ONLY (no Docker Hub pull). Use this if pull access denied.
 #
 # Portainer → Stacks → Add stack → Repository
 #   URL: https://github.com/CarShyne/beszel.Ana
+#   Reference: refs/heads/main
 #   Compose path: docker-compose.portainer.yml
 #
-# First deploy builds on the host (10–20 min on Pi). After publishing to Hub,
-# switch image: lines to jt7777/anarchy-pulse:latest and remove build: blocks.
+# Do NOT use docker-compose.yml in Portainer until images are published to Hub.
+# First deploy builds on the Pi (~10–20 min). Hub UI: http://YOUR_HOST:8090
 
 services:
   anarchy-pulse:
     build:
       context: .
       dockerfile: internal/dockerfile_hub
-    image: jt7777/anarchy-pulse:latest
     container_name: anarchy-pulse
     restart: unless-stopped
     environment:
@@ -27,7 +27,6 @@ services:
     build:
       context: .
       dockerfile: internal/dockerfile_agent_alpine
-    image: jt7777/anarchy-pulse-agent:latest
     container_name: anarchy-pulse-agent
     restart: unless-stopped
     network_mode: host
