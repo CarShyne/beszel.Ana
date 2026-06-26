@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/henrygd/beszel/agent/deltatracker"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/agent/deltatracker"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 	psutilNet "github.com/shirou/gopsutil/v4/net"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

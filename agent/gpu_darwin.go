@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/henrygd/beszel/agent/utils"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/agent/utils"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 )
 
 const (

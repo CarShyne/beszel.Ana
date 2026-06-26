@@ -287,8 +287,8 @@ export const chartMargin = { top: 12, right: 5 }
 /**
  * Retuns value of system host, truncating full path if socket.
  * @example
- * // Assuming system.host is "/var/run/beszel.sock"
- * const hostname = getHostDisplayValue(system) // hostname will be "beszel.sock"
+ * // Assuming system.host is "/var/run/anarchy-pulse.sock"
+ * const hostname = getHostDisplayValue(system) // hostname will be "anarchy-pulse.sock"
  */
 export const getHostDisplayValue = (system: SystemRecord): string => system.host.slice(system.host.lastIndexOf("/") + 1)
 
@@ -316,8 +316,8 @@ export const generateToken = () => {
 	}
 }
 
-/** Get the hub URL from the global BESZEL object */
-export const getHubURL = () => globalThis.BESZEL?.HUB_URL || window.location.origin
+/** Get the hub URL from the global ANARCHY_PULSE object */
+export const getHubURL = () => globalThis.ANARCHY_PULSE?.HUB_URL || window.location.origin
 
 /** Map of system IDs to their corresponding tokens (used to avoid fetching in add-system dialog) */
 export const tokenMap = new Map<SystemRecord["id"], FingerprintRecord["token"]>()

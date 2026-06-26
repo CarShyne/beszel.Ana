@@ -6,13 +6,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: sl\n"
-"Project-Id-Version: beszel\n"
+"Project-Id-Version: anarchy-pulse\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-04-05 18:27\n"
 "Last-Translator: \n"
 "Language-Team: Slovenian\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
-"X-Crowdin-Project: beszel\n"
+"X-Crowdin-Project: anarchy-pulse\n"
 "X-Crowdin-Project-ID: 733311\n"
 "X-Crowdin-Language: sl\n"
 "X-Crowdin-File: /main/internal/site/src/locales/en/en.po\n"
@@ -145,11 +145,7 @@ msgstr "Po"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "After setting the environment variables, restart your Anarchy Pulse hub for changes to take effect."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "After setting the environment variables, restart your Beszel hub for changes to take effect."
-#~ msgstr "Po nastavitvi okoljskih spremenljivk ponovno zaženite vozlišče Anarchy Pulse, da spremembe začnejo veljati."
+msgstr "Po nastavitvi okoljskih spremenljivk ponovno zaženite vozlišče Anarchy Pulse, da spremembe začnejo veljati."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Agent"
@@ -185,11 +181,11 @@ msgstr "Vsi sistemi"
 
 #: src/components/login/auth-form.tsx
 msgid "Anarchy Pulse supports OpenID Connect and many OAuth2 authentication providers."
-msgstr ""
+msgstr "Anarchy Pulse podpira OpenID Connect in številne ponudnike preverjanja pristnosti OAuth2."
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Anarchy Pulse uses <0>Shoutrrr</0> to integrate with popular notification services."
-msgstr ""
+msgstr "Anarchy Pulse uporablja <0>Shoutrrr</0> za integracijo s priljubljenimi storitvami obveščanja."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -285,14 +281,6 @@ msgstr "Pred"
 #: src/components/active-alerts.tsx
 msgid "Below {0}{1} in last {2, plural, one {# minute} other {# minutes}}"
 msgstr "Pod {0}{1} v zadnjih {2, plural, one {# minuti} two {# minutah} few {# minutah} other {# minutah}}"
-
-#: src/components/login/auth-form.tsx
-#~ msgid "Beszel supports OpenID Connect and many OAuth2 authentication providers."
-#~ msgstr "Anarchy Pulse podpira OpenID Connect in številne ponudnike preverjanja pristnosti OAuth2."
-
-#: src/components/routes/settings/notifications.tsx
-#~ msgid "Beszel uses <0>Shoutrrr</0> to integrate with popular notification services."
-#~ msgstr "Anarchy Pulse uporablja <0>Shoutrrr</0> za integracijo s priljubljenimi storitvami obveščanja."
 
 #: src/components/add-system.tsx
 msgid "Binary"
@@ -1472,11 +1460,7 @@ msgstr "Pošljite en srčni utrip (ping), da preverite, ali vaša končna točka
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send periodic outbound pings to an external monitoring service so you can monitor Anarchy Pulse without exposing it to the internet."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Send periodic outbound pings to an external monitoring service so you can monitor Beszel without exposing it to the internet."
-#~ msgstr "Pošiljajte občasne odhodne pinge zunanji storitvi za spremljanje, da boste lahko spremljali Anarchy Pulse, ne da bi ga izpostavili internetu."
+msgstr "Pošiljajte občasne odhodne pinge zunanji storitvi za spremljanje, da boste lahko spremljali Anarchy Pulse, ne da bi ga izpostavili internetu."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send test heartbeat"
@@ -1505,11 +1489,7 @@ msgstr "Nastavite odstotne pragove za barve merilnikov."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Set the following environment variables on your Anarchy Pulse hub to enable heartbeat monitoring:"
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Set the following environment variables on your Beszel hub to enable heartbeat monitoring:"
-#~ msgstr "Na svojem vozlišču Anarchy Pulse nastavite naslednje okoljske spremenljivke, da omogočite spremljanje srčnega utripa:"
+msgstr "Na svojem vozlišču Anarchy Pulse nastavite naslednje okoljske spremenljivke, da omogočite spremljanje srčnega utripa:"
 
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx

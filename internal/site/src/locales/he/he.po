@@ -6,13 +6,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: he\n"
-"Project-Id-Version: beszel\n"
+"Project-Id-Version: anarchy-pulse\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-04-05 18:27\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
-"X-Crowdin-Project: beszel\n"
+"X-Crowdin-Project: anarchy-pulse\n"
 "X-Crowdin-Project-ID: 733311\n"
 "X-Crowdin-Language: he\n"
 "X-Crowdin-File: /main/internal/site/src/locales/en/en.po\n"
@@ -145,11 +145,7 @@ msgstr "אחרי"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "After setting the environment variables, restart your Anarchy Pulse hub for changes to take effect."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "After setting the environment variables, restart your Beszel hub for changes to take effect."
-#~ msgstr "לאחר הגדרת משתני הסביבה, הפעל מחדש את ה-Anarchy Pulse hub שלך כדי שהשינויים ייכנסו לתוקף."
+msgstr "לאחר הגדרת משתני הסביבה, הפעל מחדש את ה-Anarchy Pulse hub שלך כדי שהשינויים ייכנסו לתוקף."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Agent"
@@ -185,11 +181,11 @@ msgstr "כל המערכות"
 
 #: src/components/login/auth-form.tsx
 msgid "Anarchy Pulse supports OpenID Connect and many OAuth2 authentication providers."
-msgstr ""
+msgstr "Anarchy Pulse תומך ב-OpenID Connect ובספקי אימות רבים של OAuth2."
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Anarchy Pulse uses <0>Shoutrrr</0> to integrate with popular notification services."
-msgstr ""
+msgstr "Anarchy Pulse משתמש ב-<0>Shoutrrr</0> לשילוב עם שירותי התראות פופולריים."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -285,14 +281,6 @@ msgstr "לפני"
 #: src/components/active-alerts.tsx
 msgid "Below {0}{1} in last {2, plural, one {# minute} other {# minutes}}"
 msgstr "מתחת ל-{0}{1} ב-{2, plural, one {דקה האחרונה} other {-# הדקות האחרונות}}"
-
-#: src/components/login/auth-form.tsx
-#~ msgid "Beszel supports OpenID Connect and many OAuth2 authentication providers."
-#~ msgstr "Anarchy Pulse תומך ב-OpenID Connect ובספקי אימות רבים של OAuth2."
-
-#: src/components/routes/settings/notifications.tsx
-#~ msgid "Beszel uses <0>Shoutrrr</0> to integrate with popular notification services."
-#~ msgstr "Anarchy Pulse משתמש ב-<0>Shoutrrr</0> לשילוב עם שירותי התראות פופולריים."
 
 #: src/components/add-system.tsx
 msgid "Binary"
@@ -1472,11 +1460,7 @@ msgstr "שלח פינג פעימת לב בודד כדי לוודא שנקודת 
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send periodic outbound pings to an external monitoring service so you can monitor Anarchy Pulse without exposing it to the internet."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Send periodic outbound pings to an external monitoring service so you can monitor Beszel without exposing it to the internet."
-#~ msgstr "שלח פינגים יוצאים תקופתיים לשירות ניטור חיצוני כדי שתוכל לנטר את Anarchy Pulse מבלי לחשוף אותו לאינטרנט."
+msgstr "שלח פינגים יוצאים תקופתיים לשירות ניטור חיצוני כדי שתוכל לנטר את Anarchy Pulse מבלי לחשוף אותו לאינטרנט."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send test heartbeat"
@@ -1505,11 +1489,7 @@ msgstr "הגדר סף אחוזים עבור צבעי מד."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Set the following environment variables on your Anarchy Pulse hub to enable heartbeat monitoring:"
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Set the following environment variables on your Beszel hub to enable heartbeat monitoring:"
-#~ msgstr "הגדר את משתני הסביבה הבאים ב-Anarchy Pulse hub שלך כדי לאפשר ניטור פעימות לב:"
+msgstr "הגדר את משתני הסביבה הבאים ב-Anarchy Pulse hub שלך כדי לאפשר ניטור פעימות לב:"
 
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx

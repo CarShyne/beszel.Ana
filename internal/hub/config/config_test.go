@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/henrygd/beszel/internal/tests"
+	"github.com/jt7777/anarchy-pulse/internal/tests"
 
-	"github.com/henrygd/beszel/internal/hub/config"
+	"github.com/jt7777/anarchy-pulse/internal/hub/config"
 
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/stretchr/testify/assert"

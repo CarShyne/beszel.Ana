@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-SERVICE=beszel-agent
+SERVICE=anarchy-pulse-agent
 
 deb-systemd-invoke stop "$SERVICE".service
 if [ "$1" = "remove" ]; then

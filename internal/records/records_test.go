@@ -5,8 +5,8 @@ package records_test
 import (
 	"testing"
 
-	"github.com/henrygd/beszel/internal/records"
-	"github.com/henrygd/beszel/internal/tests"
+	"github.com/jt7777/anarchy-pulse/internal/records"
+	"github.com/jt7777/anarchy-pulse/internal/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

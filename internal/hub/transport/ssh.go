@@ -11,7 +11,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/fxamacker/cbor/v2"
-	"github.com/henrygd/beszel/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/common"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -188,7 +188,7 @@ func (t *SSHTransport) createSessionWithTimeout(ctx context.Context) (*ssh.Sessi
 	}
 }
 
-// extractAgentVersion extracts the beszel version from SSH server version string.
+// extractAgentVersion extracts the anarchy-pulse version from SSH server version string.
 func extractAgentVersion(versionString string) (semver.Version, error) {
 	_, after, _ := strings.Cut(versionString, "_")
 	return semver.Parse(after)

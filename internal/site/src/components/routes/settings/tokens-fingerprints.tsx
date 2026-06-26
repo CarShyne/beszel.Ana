@@ -142,7 +142,7 @@ const SectionUniversalToken = memo(() => {
 
 	async function updateToken(enable: number = -1, permanent: number = -1) {
 		// enable: 0 for disable, 1 for enable, -1 (unset) for get current state
-		const data = await pb.send(`/api/beszel/universal-token`, {
+		const data = await pb.send(`/api/anarchy-pulse/universal-token`, {
 			query: {
 				token,
 				enable,
@@ -267,7 +267,7 @@ const ActionsButtonUniversalToken = memo(({ token, checked }: { token: string; c
 		},
 		{
 			text: t`Manual setup instructions`,
-			url: "https://beszel.dev/guide/agent-installation#binary",
+			url: "https://github.com/CarShyne/beszel.Ana/agent-installation#binary",
 			icons: [ExternalLinkIcon],
 		},
 	]

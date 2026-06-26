@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/henrygd/beszel/internal/common"
-	"github.com/henrygd/beszel/internal/hub/expirymap"
-	"github.com/henrygd/beszel/internal/hub/ws"
+	"github.com/jt7777/anarchy-pulse/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/hub/expirymap"
+	"github.com/jt7777/anarchy-pulse/internal/hub/ws"
 
 	"github.com/blang/semver"
 	"github.com/lxzan/gws"
@@ -139,7 +139,7 @@ func (acr *agentConnectRequest) verifyWsConn(conn *gws.Conn, fpRecords []ws.Fing
 // validateAgentHeaders extracts and validates the token and agent version from HTTP headers.
 func (acr *agentConnectRequest) validateAgentHeaders(headers http.Header) (string, string, error) {
 	token := headers.Get("X-Token")
-	agentVersion := headers.Get("X-Beszel")
+	agentVersion := headers.Get("X-Anarchy Pulse")
 
 	if agentVersion == "" || token == "" || len(token) > 64 {
 		return "", "", errors.New("")

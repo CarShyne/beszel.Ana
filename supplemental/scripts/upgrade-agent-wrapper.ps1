@@ -2,19 +2,19 @@ param (
     [switch]$Elevated
 )
 
-# Beszel Agent Upgrade Wrapper
+# Anarchy Pulse Agent Upgrade Wrapper
 # This script downloads and executes the latest upgrade script from GitHub
 
 $ErrorActionPreference = "Stop"
 
 try {
-    Write-Host "Beszel Agent Upgrade Wrapper" -ForegroundColor Cyan
+    Write-Host "Anarchy Pulse Agent Upgrade Wrapper" -ForegroundColor Cyan
     Write-Host "============================" -ForegroundColor Cyan
     Write-Host ""
     
     # Define the URL for the latest upgrade script
-    $scriptUrl = "https://raw.githubusercontent.com/henrygd/beszel/main/supplemental/scripts/upgrade-agent.ps1"
-    $tempScriptPath = "$env:TEMP\beszel-upgrade-agent-$(Get-Date -Format 'yyyyMMdd-HHmmss').ps1"
+    $scriptUrl = "https://raw.githubusercontent.com/jt7777/anarchy-pulse/main/supplemental/scripts/upgrade-agent.ps1"
+    $tempScriptPath = "$env:TEMP\anarchy-pulse-upgrade-agent-$(Get-Date -Format 'yyyyMMdd-HHmmss').ps1"
     
     Write-Host "Downloading latest upgrade script..." -ForegroundColor Yellow
     Write-Host "From: $scriptUrl"

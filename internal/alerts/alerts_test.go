@@ -7,24 +7,24 @@ import (
 	"testing/synctest"
 	"time"
 
-	beszelTests "github.com/henrygd/beszel/internal/tests"
+	anarchyPulseTests "github.com/jt7777/anarchy-pulse/internal/tests"
 
-	"github.com/henrygd/beszel/internal/alerts"
+	"github.com/jt7777/anarchy-pulse/internal/alerts"
 	"github.com/pocketbase/dbx"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestAlertsHistory(t *testing.T) {
 	synctest.Test(t, func(t *testing.T) {
-		hub, user := beszelTests.GetHubWithUser(t)
+		hub, user := anarchyPulseTests.GetHubWithUser(t)
 		defer hub.Cleanup()
 
 		// Create systems and alerts
-		systems, err := beszelTests.CreateSystems(hub, 1, user.Id, "up")
+		systems, err := anarchyPulseTests.CreateSystems(hub, 1, user.Id, "up")
 		assert.NoError(t, err)
 		system := systems[0]
 
-		alert, err := beszelTests.CreateRecord(hub, "alerts", map[string]any{
+		alert, err := anarchyPulseTests.CreateRecord(hub, "alerts", map[string]any{
 			"name":   "Status",
 			"system": system.Id,
 			"user":   user.Id,
@@ -94,14 +94,14 @@ func TestAlertsHistory(t *testing.T) {
 
 		// Test deleting a triggered alert resolves its history
 		// Create another system and alert
-		systems2, err := beszelTests.CreateSystems(hub, 1, user.Id, "up")
+		systems2, err := anarchyPulseTests.CreateSystems(hub, 1, user.Id, "up")
 		assert.NoError(t, err)
 		system2 := systems2[0]
 		system2.Set("name", "test-system-2") // Rename for clarity
 		err = hub.SaveNoValidate(system2)
 		assert.NoError(t, err)
 
-		alert2, err := beszelTests.CreateRecord(hub, "alerts", map[string]any{
+		alert2, err := anarchyPulseTests.CreateRecord(hub, "alerts", map[string]any{
 			"name":   "Status",
 			"system": system2.Id,
 			"user":   user.Id,
@@ -144,19 +144,19 @@ func TestAlertsHistory(t *testing.T) {
 }
 
 func TestSetAlertTriggered(t *testing.T) {
-	hub, _ := beszelTests.NewTestHub(t.TempDir())
+	hub, _ := anarchyPulseTests.NewTestHub(t.TempDir())
 	defer hub.Cleanup()
 
 	hub.StartHub()
 
-	user, _ := beszelTests.CreateUser(hub, "test@example.com", "password")
-	system, _ := beszelTests.CreateRecord(hub, "systems", map[string]any{
+	user, _ := anarchyPulseTests.CreateUser(hub, "test@example.com", "password")
+	system, _ := anarchyPulseTests.CreateRecord(hub, "systems", map[string]any{
 		"name":  "test-system",
 		"users": []string{user.Id},
 		"host":  "127.0.0.1",
 	})
 
-	alertRecord, _ := beszelTests.CreateRecord(hub, "alerts", map[string]any{
+	alertRecord, _ := anarchyPulseTests.CreateRecord(hub, "alerts", map[string]any{
 		"name":      "CPU",
 		"system":    system.Id,
 		"user":      user.Id,

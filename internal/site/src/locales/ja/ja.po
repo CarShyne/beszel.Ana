@@ -6,13 +6,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: ja\n"
-"Project-Id-Version: beszel\n"
+"Project-Id-Version: anarchy-pulse\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-04-05 18:27\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: beszel\n"
+"X-Crowdin-Project: anarchy-pulse\n"
 "X-Crowdin-Project-ID: 733311\n"
 "X-Crowdin-Language: ja\n"
 "X-Crowdin-File: /main/internal/site/src/locales/en/en.po\n"
@@ -145,11 +145,7 @@ msgstr "後"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "After setting the environment variables, restart your Anarchy Pulse hub for changes to take effect."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "After setting the environment variables, restart your Beszel hub for changes to take effect."
-#~ msgstr "環境変数を設定した後、変更を有効にするために Anarchy Pulse ハブを再起動してください。"
+msgstr "環境変数を設定した後、変更を有効にするために Anarchy Pulse ハブを再起動してください。"
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Agent"
@@ -185,11 +181,11 @@ msgstr "すべてのシステム"
 
 #: src/components/login/auth-form.tsx
 msgid "Anarchy Pulse supports OpenID Connect and many OAuth2 authentication providers."
-msgstr ""
+msgstr "Anarchy PulseはOpenID Connectと多くのOAuth2認証プロバイダーをサポートしています。"
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Anarchy Pulse uses <0>Shoutrrr</0> to integrate with popular notification services."
-msgstr ""
+msgstr "Anarchy Pulseは<0>Shoutrrr</0>を使用して、人気のある通知サービスと統合します。"
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -285,14 +281,6 @@ msgstr "前"
 #: src/components/active-alerts.tsx
 msgid "Below {0}{1} in last {2, plural, one {# minute} other {# minutes}}"
 msgstr "過去{2, plural, one {# 分} other {# 分}}で{0}{1}を下回っています"
-
-#: src/components/login/auth-form.tsx
-#~ msgid "Beszel supports OpenID Connect and many OAuth2 authentication providers."
-#~ msgstr "Anarchy PulseはOpenID Connectと多くのOAuth2認証プロバイダーをサポートしています。"
-
-#: src/components/routes/settings/notifications.tsx
-#~ msgid "Beszel uses <0>Shoutrrr</0> to integrate with popular notification services."
-#~ msgstr "Anarchy Pulseは<0>Shoutrrr</0>を使用して、人気のある通知サービスと統合します。"
 
 #: src/components/add-system.tsx
 msgid "Binary"
@@ -1472,11 +1460,7 @@ msgstr "エンドポイントが機能していることを確認するために
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send periodic outbound pings to an external monitoring service so you can monitor Anarchy Pulse without exposing it to the internet."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Send periodic outbound pings to an external monitoring service so you can monitor Beszel without exposing it to the internet."
-#~ msgstr "外部監視サービスに定期的にアウトバウンド ping を送信することで、Anarchy Pulse をインターネットに公開せずに監視できます。"
+msgstr "外部監視サービスに定期的にアウトバウンド ping を送信することで、Anarchy Pulse をインターネットに公開せずに監視できます。"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send test heartbeat"
@@ -1505,11 +1489,7 @@ msgstr "メーターの色を変更するしきい値（パーセンテージ）
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Set the following environment variables on your Anarchy Pulse hub to enable heartbeat monitoring:"
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Set the following environment variables on your Beszel hub to enable heartbeat monitoring:"
-#~ msgstr "ハートビート監視を有効にするには、Anarchy Pulse ハブで次の環境変数を設定します。"
+msgstr "ハートビート監視を有効にするには、Anarchy Pulse ハブで次の環境変数を設定します。"
 
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx

@@ -53,7 +53,7 @@ export default function SettingsProfilePage({ userSettings }: { userSettings: Us
 						<p className="text-sm text-muted-foreground leading-relaxed">
 							<Trans>
 								Want to help improve our translations? Check{" "}
-								<a href="https://crowdin.com/project/beszel" className="link" target="_blank" rel="noopener noreferrer">
+								<a href="https://crowdin.com/project/anarchy-pulse" className="link" target="_blank" rel="noopener noreferrer">
 									Crowdin
 								</a>{" "}
 								for details.

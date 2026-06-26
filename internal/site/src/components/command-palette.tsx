@@ -175,14 +175,14 @@ export default memo(function CommandPalette({ open, setOpen }: { open: boolean; 
 						<CommandItem
 							keywords={["help", "oauth", "oidc"]}
 							onSelect={() => {
-								window.location.href = "https://beszel.dev/guide/what-is-beszel"
+								window.location.href = "https://github.com/CarShyne/beszel.Ana/what-is-anarchy-pulse"
 							}}
 						>
 							<BookIcon className="me-2 size-4" />
 							<span>
 								<Trans>Documentation</Trans>
 							</span>
-							<CommandShortcut>beszel.dev</CommandShortcut>
+							<CommandShortcut>github.com/jt7777/anarchy-pulse</CommandShortcut>
 						</CommandItem>
 					</CommandGroup>
 					{isAdmin() && (

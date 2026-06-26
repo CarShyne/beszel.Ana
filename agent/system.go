@@ -9,12 +9,12 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/henrygd/beszel"
-	"github.com/henrygd/beszel/agent/battery"
-	"github.com/henrygd/beszel/agent/utils"
-	"github.com/henrygd/beszel/agent/zfs"
-	"github.com/henrygd/beszel/internal/entities/container"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse"
+	"github.com/jt7777/anarchy-pulse/agent/battery"
+	"github.com/jt7777/anarchy-pulse/agent/utils"
+	"github.com/jt7777/anarchy-pulse/agent/zfs"
+	"github.com/jt7777/anarchy-pulse/internal/entities/container"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 
 	"github.com/shirou/gopsutil/v4/cpu"
 	"github.com/shirou/gopsutil/v4/host"
@@ -24,7 +24,7 @@ import (
 
 // Sets initial / non-changing values about the host system
 func (a *Agent) refreshSystemDetails() {
-	a.systemInfo.AgentVersion = beszel.Version
+	a.systemInfo.AgentVersion = anarchy-pulse.Version
 
 	// get host info from Docker if available
 	var hostInfo container.HostInfo

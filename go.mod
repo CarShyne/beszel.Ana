@@ -1,4 +1,4 @@
-module github.com/henrygd/beszel
+module github.com/jt7777/anarchy-pulse
 
 go 1.26.3
 

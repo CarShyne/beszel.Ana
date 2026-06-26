@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/henrygd/beszel/agent/deltatracker"
-	"github.com/henrygd/beszel/agent/utils"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/agent/deltatracker"
+	"github.com/jt7777/anarchy-pulse/agent/utils"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 	psutilNet "github.com/shirou/gopsutil/v4/net"
 )
 

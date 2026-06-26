@@ -6,13 +6,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: es\n"
-"Project-Id-Version: beszel\n"
+"Project-Id-Version: anarchy-pulse\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-04-05 18:27\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: beszel\n"
+"X-Crowdin-Project: anarchy-pulse\n"
 "X-Crowdin-Project-ID: 733311\n"
 "X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: /main/internal/site/src/locales/en/en.po\n"
@@ -145,11 +145,7 @@ msgstr "Después"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "After setting the environment variables, restart your Anarchy Pulse hub for changes to take effect."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "After setting the environment variables, restart your Beszel hub for changes to take effect."
-#~ msgstr "Después de configurar las variables de entorno, reinicie su hub Anarchy Pulse para que los cambios surtan efecto."
+msgstr "Después de configurar las variables de entorno, reinicie su hub Anarchy Pulse para que los cambios surtan efecto."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Agent"
@@ -185,11 +181,11 @@ msgstr "Todos los sistemas"
 
 #: src/components/login/auth-form.tsx
 msgid "Anarchy Pulse supports OpenID Connect and many OAuth2 authentication providers."
-msgstr ""
+msgstr "Anarchy Pulse admite OpenID Connect y muchos proveedores de autenticación OAuth2."
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Anarchy Pulse uses <0>Shoutrrr</0> to integrate with popular notification services."
-msgstr ""
+msgstr "Anarchy Pulse utiliza <0>Shoutrrr</0> para integrarse con servicios populares de notificación."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -285,14 +281,6 @@ msgstr "Antes"
 #: src/components/active-alerts.tsx
 msgid "Below {0}{1} in last {2, plural, one {# minute} other {# minutes}}"
 msgstr "Por debajo de {0}{1} en el último {2, plural, one {# minuto} other {# minutos}}"
-
-#: src/components/login/auth-form.tsx
-#~ msgid "Beszel supports OpenID Connect and many OAuth2 authentication providers."
-#~ msgstr "Anarchy Pulse admite OpenID Connect y muchos proveedores de autenticación OAuth2."
-
-#: src/components/routes/settings/notifications.tsx
-#~ msgid "Beszel uses <0>Shoutrrr</0> to integrate with popular notification services."
-#~ msgstr "Anarchy Pulse utiliza <0>Shoutrrr</0> para integrarse con servicios populares de notificación."
 
 #: src/components/add-system.tsx
 msgid "Binary"
@@ -1472,11 +1460,7 @@ msgstr "Envíe un único ping de latido para verificar que su punto de conexión
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send periodic outbound pings to an external monitoring service so you can monitor Anarchy Pulse without exposing it to the internet."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Send periodic outbound pings to an external monitoring service so you can monitor Beszel without exposing it to the internet."
-#~ msgstr "Envíe pings salientes periódicos a un servicio de monitorización externo para que pueda supervisar Anarchy Pulse sin exponerlo a internet."
+msgstr "Envíe pings salientes periódicos a un servicio de monitorización externo para que pueda supervisar Anarchy Pulse sin exponerlo a internet."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send test heartbeat"
@@ -1505,11 +1489,7 @@ msgstr "Establecer umbrales de porcentaje para los colores de los medidores."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Set the following environment variables on your Anarchy Pulse hub to enable heartbeat monitoring:"
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Set the following environment variables on your Beszel hub to enable heartbeat monitoring:"
-#~ msgstr "Configure las siguientes variables de entorno en su hub Anarchy Pulse para habilitar la monitorización de latidos:"
+msgstr "Configure las siguientes variables de entorno en su hub Anarchy Pulse para habilitar la monitorización de latidos:"
 
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx

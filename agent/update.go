@@ -6,10 +6,10 @@ import (
 	"os/exec"
 	"runtime"
 
-	"github.com/henrygd/beszel/internal/ghupdate"
+	"github.com/jt7777/anarchy-pulse/internal/ghupdate"
 )
 
-// restarter knows how to restart the beszel-agent service.
+// restarter knows how to restart the anarchy-pulse-agent service.
 type restarter interface {
 	Restart() error
 }
@@ -18,42 +18,42 @@ type systemdRestarter struct{ cmd string }
 
 func (s *systemdRestarter) Restart() error {
 	// Only restart if the service is active
-	if err := exec.Command(s.cmd, "is-active", "beszel-agent.service").Run(); err != nil {
+	if err := exec.Command(s.cmd, "is-active", "anarchy-pulse-agent.service").Run(); err != nil {
 		return nil
 	}
-	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting beszel-agent.service via systemd…")
-	return exec.Command(s.cmd, "restart", "beszel-agent.service").Run()
+	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting anarchy-pulse-agent.service via systemd…")
+	return exec.Command(s.cmd, "restart", "anarchy-pulse-agent.service").Run()
 }
 
 type openRCRestarter struct{ cmd string }
 
 func (o *openRCRestarter) Restart() error {
-	if err := exec.Command(o.cmd, "beszel-agent", "status").Run(); err != nil {
+	if err := exec.Command(o.cmd, "anarchy-pulse-agent", "status").Run(); err != nil {
 		return nil
 	}
-	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting beszel-agent via OpenRC…")
-	return exec.Command(o.cmd, "beszel-agent", "restart").Run()
+	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting anarchy-pulse-agent via OpenRC…")
+	return exec.Command(o.cmd, "anarchy-pulse-agent", "restart").Run()
 }
 
 type openWRTRestarter struct{ cmd string }
 
 func (w *openWRTRestarter) Restart() error {
 	// https://openwrt.org/docs/guide-user/base-system/managing_services?s[]=service
-	if err := exec.Command("/etc/init.d/beszel-agent", "running").Run(); err != nil {
+	if err := exec.Command("/etc/init.d/anarchy-pulse-agent", "running").Run(); err != nil {
 		return nil
 	}
-	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting beszel-agent via procd…")
-	return exec.Command("/etc/init.d/beszel-agent", "restart").Run()
+	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting anarchy-pulse-agent via procd…")
+	return exec.Command("/etc/init.d/anarchy-pulse-agent", "restart").Run()
 }
 
 type freeBSDRestarter struct{ cmd string }
 
 func (f *freeBSDRestarter) Restart() error {
-	if err := exec.Command(f.cmd, "beszel-agent", "status").Run(); err != nil {
+	if err := exec.Command(f.cmd, "anarchy-pulse-agent", "status").Run(); err != nil {
 		return nil
 	}
-	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting beszel-agent via FreeBSD rc…")
-	return exec.Command(f.cmd, "beszel-agent", "restart").Run()
+	ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting anarchy-pulse-agent via FreeBSD rc…")
+	return exec.Command(f.cmd, "anarchy-pulse-agent", "restart").Run()
 }
 
 func detectRestarter() restarter {
@@ -74,7 +74,7 @@ func detectRestarter() restarter {
 	return nil
 }
 
-// Update checks GitHub for a newer release of beszel-agent, applies it,
+// Update checks GitHub for a newer release of anarchy-pulse-agent, applies it,
 // fixes SELinux context if needed, and restarts the service.
 func Update(useMirror bool) error {
 	exePath, _ := os.Executable()
@@ -84,7 +84,7 @@ func Update(useMirror bool) error {
 		dataDir = os.TempDir()
 	}
 	updated, err := ghupdate.Update(ghupdate.Config{
-		ArchiveExecutable: "beszel-agent",
+		ArchiveExecutable: "anarchy-pulse-agent",
 		DataDir:           dataDir,
 		UseMirror:         useMirror,
 	})
@@ -99,9 +99,9 @@ func Update(useMirror bool) error {
 	if err := os.Chmod(exePath, 0755); err != nil {
 		ghupdate.ColorPrintf(ghupdate.ColorYellow, "Warning: failed to set executable permissions: %v", err)
 	}
-	// set ownership to beszel:beszel if possible
+	// set ownership to anarchy-pulse:anarchy-pulse if possible
 	if chownPath, err := exec.LookPath("chown"); err == nil {
-		if err := exec.Command(chownPath, "beszel:beszel", exePath).Run(); err != nil {
+		if err := exec.Command(chownPath, "anarchy-pulse:anarchy-pulse", exePath).Run(); err != nil {
 			ghupdate.ColorPrintf(ghupdate.ColorYellow, "Warning: failed to set file ownership: %v", err)
 		}
 	}

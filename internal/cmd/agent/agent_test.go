@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/henrygd/beszel/agent"
+	"github.com/jt7777/anarchy-pulse/agent"
 
 	"github.com/spf13/pflag"
 	"github.com/stretchr/testify/assert"
@@ -36,9 +36,9 @@ func TestGetAddress(t *testing.T) {
 		{
 			name: "use unix socket from flag",
 			opts: cmdOptions{
-				listen: "/tmp/beszel.sock",
+				listen: "/tmp/anarchy-pulse.sock",
 			},
-			expected: "/tmp/beszel.sock",
+			expected: "/tmp/anarchy-pulse.sock",
 		},
 		{
 			name: "use LISTEN env var",
@@ -62,9 +62,9 @@ func TestGetAddress(t *testing.T) {
 				listen: "",
 			},
 			envVars: map[string]string{
-				"LISTEN": "/tmp/beszel.sock",
+				"LISTEN": "/tmp/anarchy-pulse.sock",
 			},
-			expected: "/tmp/beszel.sock",
+			expected: "/tmp/anarchy-pulse.sock",
 		},
 		{
 			name: "flag takes precedence over env vars",
@@ -218,7 +218,7 @@ func TestGetNetwork(t *testing.T) {
 		},
 		{
 			name:     "unix network",
-			opts:     cmdOptions{listen: "/tmp/beszel.sock"},
+			opts:     cmdOptions{listen: "/tmp/anarchy-pulse.sock"},
 			expected: "unix",
 		},
 		{

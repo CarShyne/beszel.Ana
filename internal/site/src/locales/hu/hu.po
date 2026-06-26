@@ -6,13 +6,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: hu\n"
-"Project-Id-Version: beszel\n"
+"Project-Id-Version: anarchy-pulse\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-04-05 18:27\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: beszel\n"
+"X-Crowdin-Project: anarchy-pulse\n"
 "X-Crowdin-Project-ID: 733311\n"
 "X-Crowdin-Language: hu\n"
 "X-Crowdin-File: /main/internal/site/src/locales/en/en.po\n"
@@ -145,11 +145,7 @@ msgstr "Utána"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "After setting the environment variables, restart your Anarchy Pulse hub for changes to take effect."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "After setting the environment variables, restart your Beszel hub for changes to take effect."
-#~ msgstr "A környezeti változók beállítása után indítsa újra a Anarchy Pulse hubot a módosítások érvénybe léptetéséhez."
+msgstr "A környezeti változók beállítása után indítsa újra a Anarchy Pulse hubot a módosítások érvénybe léptetéséhez."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Agent"
@@ -185,11 +181,11 @@ msgstr "Minden rendszer"
 
 #: src/components/login/auth-form.tsx
 msgid "Anarchy Pulse supports OpenID Connect and many OAuth2 authentication providers."
-msgstr ""
+msgstr "A Anarchy Pulse támogatja az OpenID Connect-et és számos OAuth2 hitelesítési szolgáltatót."
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Anarchy Pulse uses <0>Shoutrrr</0> to integrate with popular notification services."
-msgstr ""
+msgstr "A Anarchy Pulse a <0>Shoutrrr</0>-t használja a népszerű értesítési szolgáltatások integrálására."
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -285,14 +281,6 @@ msgstr "Előtte"
 #: src/components/active-alerts.tsx
 msgid "Below {0}{1} in last {2, plural, one {# minute} other {# minutes}}"
 msgstr "{0}{1} alatt az elmúlt {2, plural, one {# percben} other {# percben}}"
-
-#: src/components/login/auth-form.tsx
-#~ msgid "Beszel supports OpenID Connect and many OAuth2 authentication providers."
-#~ msgstr "A Anarchy Pulse támogatja az OpenID Connect-et és számos OAuth2 hitelesítési szolgáltatót."
-
-#: src/components/routes/settings/notifications.tsx
-#~ msgid "Beszel uses <0>Shoutrrr</0> to integrate with popular notification services."
-#~ msgstr "A Anarchy Pulse a <0>Shoutrrr</0>-t használja a népszerű értesítési szolgáltatások integrálására."
 
 #: src/components/add-system.tsx
 msgid "Binary"
@@ -1472,11 +1460,7 @@ msgstr "Küldjön egyetlen heartbeat pinget a végpont működésének ellenőrz
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send periodic outbound pings to an external monitoring service so you can monitor Anarchy Pulse without exposing it to the internet."
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Send periodic outbound pings to an external monitoring service so you can monitor Beszel without exposing it to the internet."
-#~ msgstr "Küldjön időszakos kimenő pingeket egy külső megfigyelő szolgáltatásnak, így a Anarchy Pulse-t az internetnek való kitettség nélkül is megfigyelheti."
+msgstr "Küldjön időszakos kimenő pingeket egy külső megfigyelő szolgáltatásnak, így a Anarchy Pulse-t az internetnek való kitettség nélkül is megfigyelheti."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Send test heartbeat"
@@ -1505,11 +1489,7 @@ msgstr "Százalékos küszöbértékek beállítása a mérőszínekhez."
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Set the following environment variables on your Anarchy Pulse hub to enable heartbeat monitoring:"
-msgstr ""
-
-#: src/components/routes/settings/heartbeat.tsx
-#~ msgid "Set the following environment variables on your Beszel hub to enable heartbeat monitoring:"
-#~ msgstr "Állítsa be a következő környezeti változókat a Anarchy Pulse hubon a heartbeat figyelés engedélyezéséhez:"
+msgstr "Állítsa be a következő környezeti változókat a Anarchy Pulse hubon a heartbeat figyelés engedélyezéséhez:"
 
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx

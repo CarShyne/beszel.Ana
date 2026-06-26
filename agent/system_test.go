@@ -3,8 +3,8 @@ package agent
 import (
 	"testing"
 
-	"github.com/henrygd/beszel/internal/common"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

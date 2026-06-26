@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/henrygd/beszel/agent/utils"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/agent/utils"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -1366,7 +1366,7 @@ echo '[{"device_name":"NVIDIA Test GPU","temp":"52C","power_draw":"31W","gpu_uti
 func TestNewGPUManagerPriorityNvtopFallback(t *testing.T) {
 	dir := t.TempDir()
 	t.Setenv("PATH", dir)
-	t.Setenv("BESZEL_AGENT_GPU_COLLECTOR", "nvtop,nvidia-smi")
+	t.Setenv("ANARCHY_PULSE_AGENT_GPU_COLLECTOR", "nvtop,nvidia-smi")
 
 	nvtopPath := filepath.Join(dir, "nvtop")
 	nvtopScript := `#!/bin/sh
@@ -1392,7 +1392,7 @@ echo "0, NVIDIA Priority GPU, 45, 512, 2048, 12, 25"`
 func TestNewGPUManagerPriorityMixedCollectors(t *testing.T) {
 	dir := t.TempDir()
 	t.Setenv("PATH", dir)
-	t.Setenv("BESZEL_AGENT_GPU_COLLECTOR", "intel_gpu_top,rocm-smi")
+	t.Setenv("ANARCHY_PULSE_AGENT_GPU_COLLECTOR", "intel_gpu_top,rocm-smi")
 
 	intelPath := filepath.Join(dir, "intel_gpu_top")
 	intelScript := `#!/bin/sh
@@ -1423,7 +1423,7 @@ echo '{"card0": {"Temperature (Sensor edge) (C)": "49.0", "Current Socket Graphi
 func TestNewGPUManagerPriorityNvmlFallbackToNvidiaSmi(t *testing.T) {
 	dir := t.TempDir()
 	t.Setenv("PATH", dir)
-	t.Setenv("BESZEL_AGENT_GPU_COLLECTOR", "nvml,nvidia-smi")
+	t.Setenv("ANARCHY_PULSE_AGENT_GPU_COLLECTOR", "nvml,nvidia-smi")
 
 	nvidiaPath := filepath.Join(dir, "nvidia-smi")
 	nvidiaScript := `#!/bin/sh
@@ -1445,7 +1445,7 @@ func TestNewGPUManagerConfiguredCollectorsMustStart(t *testing.T) {
 	t.Setenv("PATH", dir)
 
 	t.Run("configured valid collector unavailable", func(t *testing.T) {
-		t.Setenv("BESZEL_AGENT_GPU_COLLECTOR", "nvidia-smi")
+		t.Setenv("ANARCHY_PULSE_AGENT_GPU_COLLECTOR", "nvidia-smi")
 		gm, err := NewGPUManager()
 		require.Nil(t, gm)
 		require.Error(t, err)
@@ -1453,7 +1453,7 @@ func TestNewGPUManagerConfiguredCollectorsMustStart(t *testing.T) {
 	})
 
 	t.Run("configured collector list has only unknown entries", func(t *testing.T) {
-		t.Setenv("BESZEL_AGENT_GPU_COLLECTOR", "bad,unknown")
+		t.Setenv("ANARCHY_PULSE_AGENT_GPU_COLLECTOR", "bad,unknown")
 		gm, err := NewGPUManager()
 		require.Nil(t, gm)
 		require.Error(t, err)
@@ -1471,7 +1471,7 @@ func TestCollectorDefinitionsNvmlDoesNotRequireNvidiaSmi(t *testing.T) {
 func TestNewGPUManagerConfiguredNvmlBypassesCapabilityGate(t *testing.T) {
 	dir := t.TempDir()
 	t.Setenv("PATH", dir)
-	t.Setenv("BESZEL_AGENT_GPU_COLLECTOR", "nvml")
+	t.Setenv("ANARCHY_PULSE_AGENT_GPU_COLLECTOR", "nvml")
 
 	gm, err := NewGPUManager()
 	require.Nil(t, gm)
@@ -1483,7 +1483,7 @@ func TestNewGPUManagerConfiguredNvmlBypassesCapabilityGate(t *testing.T) {
 func TestNewGPUManagerJetsonIgnoresCollectorConfig(t *testing.T) {
 	dir := t.TempDir()
 	t.Setenv("PATH", dir)
-	t.Setenv("BESZEL_AGENT_GPU_COLLECTOR", "nvidia-smi")
+	t.Setenv("ANARCHY_PULSE_AGENT_GPU_COLLECTOR", "nvidia-smi")
 
 	tegraPath := filepath.Join(dir, "tegrastats")
 	tegraScript := `#!/bin/sh
@@ -1992,7 +1992,7 @@ echo "189  187      412  67  1.80  2.45   1950    823   8.50    2   1    15.00  
 	}
 
 	// Set device selector via prefixed env var
-	t.Setenv("BESZEL_AGENT_INTEL_GPU_DEVICE", "sriov")
+	t.Setenv("ANARCHY_PULSE_AGENT_INTEL_GPU_DEVICE", "sriov")
 
 	gm := &GPUManager{GpuDataMap: make(map[string]*system.GPUData)}
 	if err := gm.collectIntelStats(); err != nil {

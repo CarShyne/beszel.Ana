@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/henrygd/beszel/internal/entities/container"
-	"github.com/henrygd/beszel/internal/entities/systemd"
+	"github.com/jt7777/anarchy-pulse/internal/entities/container"
+	"github.com/jt7777/anarchy-pulse/internal/entities/systemd"
 )
 
 type Stats struct {

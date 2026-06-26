@@ -24,7 +24,7 @@ import {
 	defaultLayoutWidth,
 } from "@/lib/stores.ts"
 import * as systemsManager from "@/lib/systemsManager.ts"
-import type { BeszelInfo, UpdateInfo } from "./types"
+import type { AnarchyPulseInfo, UpdateInfo } from "./types"
 
 const LoginPage = lazy(() => import("@/components/login/login.tsx"))
 const Home = lazy(() => import("@/components/routes/home.tsx"))
@@ -42,11 +42,11 @@ const App = memo(() => {
 			$authenticated.set(pb.authStore.isValid)
 		})
 		// get general info for authenticated users, such as public key and version
-		pb.send<BeszelInfo>("/api/beszel/info", {}).then((data) => {
+		pb.send<AnarchyPulseInfo>("/api/anarchy-pulse/info", {}).then((data) => {
 			$publicKey.set(data.key)
 			// check for updates if enabled
 			if (data.cu && isAdmin()) {
-				pb.send<UpdateInfo>("/api/beszel/update", {}).then($newVersion.set)
+				pb.send<UpdateInfo>("/api/anarchy-pulse/update", {}).then($newVersion.set)
 			}
 		})
 		// get user settings

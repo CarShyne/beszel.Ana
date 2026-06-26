@@ -1,6 +1,6 @@
-// Package beszel provides core application constants and version information
+// Package anarchy-pulse provides core application constants and version information
 // which are used throughout the application.
-package beszel
+package anarchypulse
 
 import "github.com/blang/semver"
 
@@ -8,7 +8,7 @@ const (
 	// Version is the current version of the application.
 	Version = "0.18.7"
 	// AppName is the name of the application.
-	AppName = "beszel"
+	AppName = "anarchy-pulse"
 )
 
 // MinVersionCbor is the minimum supported version for CBOR compatibility.

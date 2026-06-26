@@ -1,6 +1,6 @@
 //go:build windows
 
-//go:generate dotnet build -c Release lhm/beszel_lhm.csproj
+//go:generate dotnet build -c Release lhm/anarchy_pulse_lhm.csproj
 
 package agent
 
@@ -44,8 +44,8 @@ type lhmProcess struct {
 var lhmFs embed.FS
 
 var (
-	beszelLhm     *lhmProcess
-	beszelLhmOnce sync.Once
+	anarchyPulseLhm     *lhmProcess
+	anarchyPulseLhmOnce sync.Once
 	useLHM        = os.Getenv("LHM") == "true"
 )
 
@@ -53,8 +53,8 @@ var errNoSensors = errors.New("no sensors found (try running as admin with LHM=t
 
 // newlhmProcess copies the embedded LHM executable to a temporary directory and starts it.
 func newlhmProcess() (*lhmProcess, error) {
-	destDir := filepath.Join(os.TempDir(), "beszel")
-	execPath := filepath.Join(destDir, "beszel_lhm.exe")
+	destDir := filepath.Join(os.TempDir(), "anarchy-pulse")
+	execPath := filepath.Join(destDir, "anarchy_pulse_lhm.exe")
 
 	if err := os.MkdirAll(destDir, 0755); err != nil {
 		return nil, fmt.Errorf("failed to create temp directory: %w", err)
@@ -228,19 +228,19 @@ func getSensorTemps(ctx context.Context) (temps []sensors.TemperatureStat, err e
 	}
 
 	// Initialize process once
-	beszelLhmOnce.Do(func() {
-		beszelLhm, err = newlhmProcess()
+	anarchyPulseLhmOnce.Do(func() {
+		anarchyPulseLhm, err = newlhmProcess()
 	})
 
 	if err != nil {
 		return temps, fmt.Errorf("failed to initialize lhm: %w", err)
 	}
 
-	if beszelLhm == nil {
+	if anarchyPulseLhm == nil {
 		return temps, fmt.Errorf("lhm not available")
 	}
 
-	return beszelLhm.getTemps(ctx)
+	return anarchyPulseLhm.getTemps(ctx)
 }
 
 // cleanup terminates the process and closes resources

@@ -4,12 +4,10 @@ Anarchy Pulse is an AnarchyAI-themed server monitoring platform — a fork of [B
 
 It has a friendly web interface, simple configuration, and is ready to use out of the box. It supports automatic backup, multi-user, OAuth authentication, and API access.
 
-[![agent Docker Image Size](https://img.shields.io/docker/image-size/henrygd/beszel-agent/latest?logo=docker&label=agent%20image%20size)](https://hub.docker.com/r/henrygd/beszel-agent)
-[![hub Docker Image Size](https://img.shields.io/docker/image-size/henrygd/beszel/latest?logo=docker&label=hub%20image%20size)](https://hub.docker.com/r/henrygd/beszel)
-[![MIT license](https://img.shields.io/github/license/henrygd/beszel?color=%239944ee)](https://github.com/henrygd/beszel/blob/main/LICENSE)
-[![Crowdin](https://badges.crowdin.net/beszel/localized.svg)](https://crowdin.com/project/beszel)
+[![agent Docker Image Size](https://img.shields.io/docker/image-size/jt7777/anarchy-pulse-agent/latest?logo=docker&label=agent%20image%20size)](https://hub.docker.com/r/jt7777/anarchy-pulse-agent)
+[![hub Docker Image Size](https://img.shields.io/docker/image-size/jt7777/anarchy-pulse/latest?logo=docker&label=hub%20image%20size)](https://hub.docker.com/r/jt7777/anarchy-pulse)
 
-![Screenshot of Beszel dashboard and system page, side by side. The dashboard shows metrics from multiple connected systems, while the system page shows detailed metrics for a single system.](https://henrygd-assets.b-cdn.net/beszel/screenshot-new.png)
+![Screenshot of Anarchy Pulse dashboard and system page, side by side. The dashboard shows metrics from multiple connected systems, while the system page shows detailed metrics for a single system.](https://henrygd-assets.b-cdn.net/beszel/screenshot-new.png)
 
 ## Features
 
@@ -20,7 +18,6 @@ It has a friendly web interface, simple configuration, and is ready to use out o
 - **Multi-user**: Users manage their own systems. Admins can share systems across users.
 - **OAuth / OIDC**: Supports many OAuth2 providers. Password auth can be disabled.
 - **Automatic backups**: Save to and restore from disk or S3-compatible storage.
-<!-- - **REST API**: Use or update your data in your own scripts and applications. -->
 
 ## Architecture
 
@@ -31,13 +28,13 @@ Anarchy Pulse consists of two main components: the **hub** and the **agent**.
 
 ## Getting started
 
-The [quick start guide](https://beszel.dev/guide/getting-started) and other documentation is available on the upstream [Beszel](https://beszel.dev) website. You'll be up and running in a few minutes.
+Use the root `docker-compose.yml` with Docker Desktop, or see the [Anarchy Pulse repository](https://github.com/CarShyne/beszel.Ana) for build and deployment options.
 
-## Screenshots
+```bash
+docker compose up -d
+```
 
-![Dashboard](https://beszel.dev/image/dashboard.png)
-![System page](https://beszel.dev/image/system-full.png)
-![Notification Settings](https://beszel.dev/image/settings-notifications.png)
+Hub UI: [http://localhost:8090](http://localhost:8090)
 
 ## Supported metrics
 
@@ -51,11 +48,11 @@ The [quick start guide](https://beszel.dev/guide/getting-started) and other docu
 - **GPU usage / power draw** - Nvidia, AMD, and Intel.
 - **Battery** - Host system battery charge.
 - **Containers** - Status and metrics of all running Docker / Podman containers.
-- **S.M.A.R.T.** - Host system disk health (includes eMMC wear/EOL and Linux mdraid array health via sysfs when available).
+- **S.M.A.R.T.** - Host system disk health.
 
 ## Upstream
 
-This project is based on [Beszel](https://github.com/henrygd/beszel) by [henrygd](https://github.com/henrygd). Bug reports and feature requests for the upstream project can be posted on [GitHub issues](https://github.com/henrygd/beszel/issues). Support and general discussion are available on [GitHub discussions](https://github.com/henrygd/beszel/discussions) or the community-run [Matrix room](https://matrix.to/#/#beszel:matrix.org): `#beszel:matrix.org`.
+Based on [Beszel](https://github.com/henrygd/beszel) by henrygd — MIT licensed server monitoring.
 
 ## License
 

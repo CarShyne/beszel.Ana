@@ -1,0 +1,27 @@
+services:
+  anarchy-pulse:
+    image: jt7777/anarchy-pulse:latest
+    # Alternative: build from internal/dockerfile_hub
+    # build:
+    #   context: .
+    #   dockerfile: internal/dockerfile_hub
+    container_name: anarchy-pulse
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - anarchy_pulse_data:/anarchy_pulse_data
+
+  anarchy-pulse-agent:
+    image: jt7777/anarchy-pulse-agent:latest
+    container_name: anarchy-pulse-agent
+    restart: unless-stopped
+    depends_on:
+      - anarchy-pulse
+    environment:
+      HUB_URL: http://anarchy-pulse:8090
+      TOKEN: ${TOKEN:-}
+      KEY: ${KEY:-}
+
+volumes:
+  anarchy_pulse_data:

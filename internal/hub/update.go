@@ -6,17 +6,17 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/henrygd/beszel/internal/ghupdate"
+	"github.com/jt7777/anarchy-pulse/internal/ghupdate"
 	"github.com/spf13/cobra"
 )
 
-// Update updates beszel to the latest version
+// Update updates anarchy-pulse to the latest version
 func Update(cmd *cobra.Command, _ []string) {
 	dataDir := os.TempDir()
 
-	// set dataDir to ./beszel_data if it exists
-	if _, err := os.Stat("./beszel_data"); err == nil {
-		dataDir = "./beszel_data"
+	// set dataDir to ./anarchy_pulse_data if it exists
+	if _, err := os.Stat("./anarchy_pulse_data"); err == nil {
+		dataDir = "./anarchy_pulse_data"
 	}
 
 	// Check if china-mirrors flag is set
@@ -29,7 +29,7 @@ func Update(cmd *cobra.Command, _ []string) {
 	}
 
 	updated, err := ghupdate.Update(ghupdate.Config{
-		ArchiveExecutable: "beszel",
+		ArchiveExecutable: "anarchy-pulse",
 		DataDir:           dataDir,
 		UseMirror:         useMirror,
 	})
@@ -54,18 +54,18 @@ func Update(cmd *cobra.Command, _ []string) {
 	restartService()
 }
 
-// restartService attempts to restart the beszel service
+// restartService attempts to restart the anarchy-pulse service
 func restartService() {
 	// Check if we're running as a service by looking for systemd
 	if _, err := exec.LookPath("systemctl"); err == nil {
-		// Check if beszel service exists and is active
-		cmd := exec.Command("systemctl", "is-active", "beszel.service")
+		// Check if anarchy-pulse service exists and is active
+		cmd := exec.Command("systemctl", "is-active", "anarchy-pulse.service")
 		if err := cmd.Run(); err == nil {
-			ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting beszel service...")
-			restartCmd := exec.Command("systemctl", "restart", "beszel.service")
+			ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting anarchy-pulse service...")
+			restartCmd := exec.Command("systemctl", "restart", "anarchy-pulse.service")
 			if err := restartCmd.Run(); err != nil {
 				ghupdate.ColorPrintf(ghupdate.ColorYellow, "Warning: Failed to restart service: %v\n", err)
-				ghupdate.ColorPrint(ghupdate.ColorYellow, "Please restart the service manually: sudo systemctl restart beszel")
+				ghupdate.ColorPrint(ghupdate.ColorYellow, "Please restart the service manually: sudo systemctl restart anarchy-pulse")
 			} else {
 				ghupdate.ColorPrint(ghupdate.ColorGreen, "Service restarted successfully")
 			}
@@ -75,13 +75,13 @@ func restartService() {
 
 	// Check for OpenRC (Alpine Linux)
 	if _, err := exec.LookPath("rc-service"); err == nil {
-		cmd := exec.Command("rc-service", "beszel", "status")
+		cmd := exec.Command("rc-service", "anarchy-pulse", "status")
 		if err := cmd.Run(); err == nil {
-			ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting beszel service...")
-			restartCmd := exec.Command("rc-service", "beszel", "restart")
+			ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting anarchy-pulse service...")
+			restartCmd := exec.Command("rc-service", "anarchy-pulse", "restart")
 			if err := restartCmd.Run(); err != nil {
 				ghupdate.ColorPrintf(ghupdate.ColorYellow, "Warning: Failed to restart service: %v\n", err)
-				ghupdate.ColorPrint(ghupdate.ColorYellow, "Please restart the service manually: sudo rc-service beszel restart")
+				ghupdate.ColorPrint(ghupdate.ColorYellow, "Please restart the service manually: sudo rc-service anarchy-pulse restart")
 			} else {
 				ghupdate.ColorPrint(ghupdate.ColorGreen, "Service restarted successfully")
 			}

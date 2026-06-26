@@ -5,7 +5,7 @@ package systems
 import (
 	"testing"
 
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 )
 
 func TestCombinedData_MigrateDeprecatedFields(t *testing.T) {

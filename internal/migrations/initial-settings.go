@@ -61,9 +61,9 @@ func init() {
 	}, nil)
 }
 
-// GetEnv retrieves an environment variable with a "BESZEL_HUB_" prefix, or falls back to the unprefixed key.
+// GetEnv retrieves an environment variable with a "ANARCHY_PULSE_HUB_" prefix, or falls back to the unprefixed key.
 func GetEnv(key string) (value string, exists bool) {
-	if value, exists = os.LookupEnv("BESZEL_HUB_" + key); exists {
+	if value, exists = os.LookupEnv("ANARCHY_PULSE_HUB_" + key); exists {
 		return value, exists
 	}
 	// Fallback to the old unprefixed key

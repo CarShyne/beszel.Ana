@@ -98,35 +98,35 @@ generate_freebsd_rc_service() {
   cat <<'EOF'
 #!/bin/sh
 
-# PROVIDE: beszel_agent
+# PROVIDE: anarchy_pulse_agent
 # REQUIRE: DAEMON NETWORKING
 # BEFORE: LOGIN
 # KEYWORD: shutdown
 
-# Add the following lines to /etc/rc.conf to configure Beszel Agent:
+# Add the following lines to /etc/rc.conf to configure Anarchy Pulse Agent:
 #
-# beszel_agent_enable (bool):   Set to YES to enable Beszel Agent
+# anarchy_pulse_agent_enable (bool):   Set to YES to enable Anarchy Pulse Agent
 #                               Default: YES
-# beszel_agent_env_file (str):  Beszel Agent env configuration file
-#                               Default: /usr/local/etc/beszel-agent/env
-# beszel_agent_user (str):      Beszel Agent daemon user
-#                               Default: beszel
-# beszel_agent_bin (str):       Path to the beszel-agent binary
-#                               Default: /usr/local/sbin/beszel-agent
-# beszel_agent_flags (str):     Extra flags passed to beszel-agent command invocation
+# anarchy_pulse_agent_env_file (str):  Anarchy Pulse Agent env configuration file
+#                               Default: /usr/local/etc/anarchy-pulse-agent/env
+# anarchy_pulse_agent_user (str):      Anarchy Pulse Agent daemon user
+#                               Default: anarchy-pulse
+# anarchy_pulse_agent_bin (str):       Path to the anarchy-pulse-agent binary
+#                               Default: /usr/local/sbin/anarchy-pulse-agent
+# anarchy_pulse_agent_flags (str):     Extra flags passed to anarchy-pulse-agent command invocation
 #                               Default:
 
 . /etc/rc.subr
 
-name="beszel_agent"
-rcvar=beszel_agent_enable
+name="anarchy_pulse_agent"
+rcvar=anarchy_pulse_agent_enable
 
 load_rc_config $name
-: ${beszel_agent_enable:="YES"}
-: ${beszel_agent_user:="beszel"}
-: ${beszel_agent_flags:=""}
-: ${beszel_agent_env_file:="/usr/local/etc/beszel-agent/env"}
-: ${beszel_agent_bin:="/usr/local/sbin/beszel-agent"}
+: ${anarchy_pulse_agent_enable:="YES"}
+: ${anarchy_pulse_agent_user:="anarchy-pulse"}
+: ${anarchy_pulse_agent_flags:=""}
+: ${anarchy_pulse_agent_env_file:="/usr/local/etc/anarchy-pulse-agent/env"}
+: ${anarchy_pulse_agent_bin:="/usr/local/sbin/anarchy-pulse-agent"}
 
 logfile="/var/log/${name}.log"
 pidfile="/var/run/${name}.pid"
@@ -137,27 +137,27 @@ start_cmd="${name}_start"
 stop_cmd="${name}_stop"
 
 extra_commands="upgrade"
-upgrade_cmd="beszel_agent_upgrade"
+upgrade_cmd="anarchy_pulse_agent_upgrade"
 
-beszel_agent_prestart()
+anarchy_pulse_agent_prestart()
 {
-    if [ ! -f "${beszel_agent_env_file}" ]; then
-        echo WARNING: missing "${beszel_agent_env_file}" env file. Start aborted.
+    if [ ! -f "${anarchy_pulse_agent_env_file}" ]; then
+        echo WARNING: missing "${anarchy_pulse_agent_env_file}" env file. Start aborted.
         exit 1
     fi
 }
 
-beszel_agent_start()
+anarchy_pulse_agent_start()
 {
     echo "Starting ${name}"
     /usr/sbin/daemon -fc \
             -P "${pidfile}" \
             -o "${logfile}" \
-            -u "${beszel_agent_user}" \
-            "${beszel_agent_bin}" ${beszel_agent_flags}
+            -u "${anarchy_pulse_agent_user}" \
+            "${anarchy_pulse_agent_bin}" ${anarchy_pulse_agent_flags}
 }
 
-beszel_agent_stop()
+anarchy_pulse_agent_stop()
 {
     pid="$(check_pidfile "${pidfile}" "${procname}")"
     if [ -n "${pid}" ]; then
@@ -169,13 +169,13 @@ beszel_agent_stop()
     fi
 }
 
-beszel_agent_upgrade()
+anarchy_pulse_agent_upgrade()
 {
     echo "Upgrading ${name}"
     if command -v sudo >/dev/null; then
-        sudo -u "${beszel_agent_user}" -- "${beszel_agent_bin}" update
+        sudo -u "${anarchy_pulse_agent_user}" -- "${anarchy_pulse_agent_bin}" update
     else
-        su -m "${beszel_agent_user}" -c "${beszel_agent_bin} update"
+        su -m "${anarchy_pulse_agent_user}" -c "${anarchy_pulse_agent_bin} update"
     fi
 }
 
@@ -244,7 +244,7 @@ VERSION="latest"
 # Check for help flag
 case "$1" in
 -h | --help)
-  printf "Beszel Agent installation script\n\n"
+  printf "Anarchy Pulse Agent installation script\n\n"
   printf "Usage: ./install-agent.sh [options]\n\n"
   printf "Options: \n"
   printf "  -k                    : SSH key (required, or interactive if not provided)\n"
@@ -252,11 +252,11 @@ case "$1" in
   printf "  -t                    : Token (optional for backwards compatibility)\n"
   printf "  -url                  : Hub URL (optional for backwards compatibility)\n"
   printf "  -v, --version         : Version to install (default: latest)\n"
-  printf "  -u                    : Uninstall Beszel Agent\n"
+  printf "  -u                    : Uninstall Anarchy Pulse Agent\n"
   printf "  --auto-update [VALUE] : Control automatic daily updates\n"
   printf "                          VALUE can be true (enable) or false (disable). If not specified, will prompt.\n"
   printf "  --mirror [URL]        : Use GitHub proxy to resolve network timeout issues in mainland China\n"
-  printf "                          URL: optional custom proxy URL (default: https://gh.beszel.dev)\n"
+  printf "                          URL: optional custom proxy URL (default: https://github.com/jt7777/anarchy-pulse)\n"
   printf "  -h, --help            : Display this help message\n"
   exit 0
   ;;
@@ -323,7 +323,7 @@ while [ $# -gt 0 ]; do
         GITHUB_PROXY_URL="$CUSTOM_PROXY"
         GITHUB_URL="$(ensure_trailing_slash "$CUSTOM_PROXY")https://github.com"
       else
-        GITHUB_PROXY_URL="https://gh.beszel.dev"
+        GITHUB_PROXY_URL="https://github.com/jt7777/anarchy-pulse"
         GITHUB_URL="$GITHUB_PROXY_URL"
       fi
     elif [ "$2" != "" ] && ! echo "$2" | grep -q '^-'; then
@@ -333,7 +333,7 @@ while [ $# -gt 0 ]; do
       shift
     else
       # No value specified, use default
-      GITHUB_PROXY_URL="https://gh.beszel.dev"
+      GITHUB_PROXY_URL="https://github.com/jt7777/anarchy-pulse"
       GITHUB_URL="$GITHUB_PROXY_URL"
     fi
     ;;
@@ -368,26 +368,26 @@ done
 
 # Set paths based on operating system
 if is_freebsd; then
-  AGENT_DIR="/usr/local/etc/beszel-agent"
+  AGENT_DIR="/usr/local/etc/anarchy-pulse-agent"
   BIN_DIR="/usr/local/sbin"
-  BIN_PATH="/usr/local/sbin/beszel-agent"
+  BIN_PATH="/usr/local/sbin/anarchy-pulse-agent"
 else
-  AGENT_DIR="/opt/beszel-agent"
-  BIN_DIR="/opt/beszel-agent"
-  BIN_PATH="/opt/beszel-agent/beszel-agent"
+  AGENT_DIR="/opt/anarchy-pulse-agent"
+  BIN_DIR="/opt/anarchy-pulse-agent"
+  BIN_PATH="/opt/anarchy-pulse-agent/anarchy-pulse-agent"
 fi
 
 # Stop existing service if it exists (for upgrades)
 if [ "$UNINSTALL" != true ] && [ -f "$BIN_PATH" ]; then
   echo "Existing installation detected. Stopping service for upgrade..."
   if is_alpine; then
-    rc-service beszel-agent stop 2>/dev/null || true
+    rc-service anarchy-pulse-agent stop 2>/dev/null || true
   elif is_openwrt; then
-    /etc/init.d/beszel-agent stop 2>/dev/null || true
+    /etc/init.d/anarchy-pulse-agent stop 2>/dev/null || true
   elif is_freebsd; then
-    service beszel-agent stop 2>/dev/null || true
+    service anarchy-pulse-agent stop 2>/dev/null || true
   else
-    systemctl stop beszel-agent.service 2>/dev/null || true
+    systemctl stop anarchy-pulse-agent.service 2>/dev/null || true
   fi
 fi
 
@@ -398,53 +398,53 @@ if [ "$UNINSTALL" = true ]; then
 
   if is_alpine; then
     echo "Stopping and disabling the agent service..."
-    rc-service beszel-agent stop
-    rc-update del beszel-agent default
+    rc-service anarchy-pulse-agent stop
+    rc-update del anarchy-pulse-agent default
 
     echo "Removing the OpenRC service files..."
-    rm -f /etc/init.d/beszel-agent
+    rm -f /etc/init.d/anarchy-pulse-agent
 
     # Remove the daily update cron job if it exists
     echo "Removing the daily update cron job..."
-    if crontab -u root -l 2>/dev/null | grep -q "beszel-agent.*update"; then
-      crontab -u root -l 2>/dev/null | grep -v "beszel-agent.*update" | crontab -u root -
+    if crontab -u root -l 2>/dev/null | grep -q "anarchy-pulse-agent.*update"; then
+      crontab -u root -l 2>/dev/null | grep -v "anarchy-pulse-agent.*update" | crontab -u root -
     fi
 
     # Remove log files
     echo "Removing log files..."
-    rm -f /var/log/beszel-agent.log /var/log/beszel-agent.err
+    rm -f /var/log/anarchy-pulse-agent.log /var/log/anarchy-pulse-agent.err
   elif is_openwrt; then
     echo "Stopping and disabling the agent service..."
-    /etc/init.d/beszel-agent stop
-    /etc/init.d/beszel-agent disable
+    /etc/init.d/anarchy-pulse-agent stop
+    /etc/init.d/anarchy-pulse-agent disable
 
     echo "Removing the OpenWRT service files..."
-    rm -f /etc/init.d/beszel-agent
+    rm -f /etc/init.d/anarchy-pulse-agent
 
     # Remove the update service if it exists
     echo "Removing the daily update service..."
-    # Remove legacy beszel account based crontab file
-    rm -f /etc/crontabs/beszel
+    # Remove legacy anarchy-pulse account based crontab file
+    rm -f /etc/crontabs/anarchy-pulse
     # Install root crontab job
-    if crontab -u root -l 2>/dev/null | grep -q "beszel-agent.*update"; then
-      crontab -u root -l 2>/dev/null | grep -v "beszel-agent.*update" | crontab -u root -
+    if crontab -u root -l 2>/dev/null | grep -q "anarchy-pulse-agent.*update"; then
+      crontab -u root -l 2>/dev/null | grep -v "anarchy-pulse-agent.*update" | crontab -u root -
     fi
 
   elif is_freebsd; then
     echo "Stopping and disabling the agent service..."
-    service beszel-agent stop
-    sysrc beszel_agent_enable="NO"
+    service anarchy-pulse-agent stop
+    sysrc anarchy_pulse_agent_enable="NO"
 
     echo "Removing the FreeBSD service files..."
-    rm -f /usr/local/etc/rc.d/beszel-agent
+    rm -f /usr/local/etc/rc.d/anarchy-pulse-agent
 
     # Remove the daily update cron job if it exists
     echo "Removing the daily update cron job..."
-    rm -f /etc/cron.d/beszel-agent
+    rm -f /etc/cron.d/anarchy-pulse-agent
 
     # Remove log files
     echo "Removing log files..."
-    rm -f /var/log/beszel-agent.log
+    rm -f /var/log/anarchy-pulse-agent.log
 
     # Remove env file and directories
     echo "Removing environment configuration file..."
@@ -454,36 +454,36 @@ if [ "$UNINSTALL" = true ]; then
 
   else
     echo "Stopping and disabling the agent service..."
-    systemctl stop beszel-agent.service
-    systemctl disable beszel-agent.service >/dev/null 2>&1
+    systemctl stop anarchy-pulse-agent.service
+    systemctl disable anarchy-pulse-agent.service >/dev/null 2>&1
 
     echo "Removing the systemd service file..."
-    rm /etc/systemd/system/beszel-agent.service
+    rm /etc/systemd/system/anarchy-pulse-agent.service
 
     # Remove the update timer and service if they exist
     echo "Removing the daily update service and timer..."
-    systemctl stop beszel-agent-update.timer 2>/dev/null
-    systemctl disable beszel-agent-update.timer >/dev/null 2>&1
-    rm -f /etc/systemd/system/beszel-agent-update.service
-    rm -f /etc/systemd/system/beszel-agent-update.timer
+    systemctl stop anarchy-pulse-agent-update.timer 2>/dev/null
+    systemctl disable anarchy-pulse-agent-update.timer >/dev/null 2>&1
+    rm -f /etc/systemd/system/anarchy-pulse-agent-update.service
+    rm -f /etc/systemd/system/anarchy-pulse-agent-update.timer
 
     systemctl daemon-reload
   fi
 
-  echo "Removing the Beszel Agent directory..."
+  echo "Removing the Anarchy Pulse Agent directory..."
   rm -rf "$AGENT_DIR"
 
   echo "Removing the dedicated user for the agent service..."
-  killall beszel-agent 2>/dev/null
+  killall anarchy-pulse-agent 2>/dev/null
   if is_alpine || is_openwrt; then
-    deluser beszel 2>/dev/null
+    deluser anarchy-pulse 2>/dev/null
   elif is_freebsd; then
-    pw user del beszel 2>/dev/null
+    pw user del anarchy-pulse 2>/dev/null
   else
-    userdel beszel 2>/dev/null
+    userdel anarchy-pulse 2>/dev/null
   fi
 
-  echo "Beszel Agent has been uninstalled successfully!"
+  echo "Anarchy Pulse Agent has been uninstalled successfully!"
   exit 0
 fi
 
@@ -553,43 +553,43 @@ else
 fi
 
 # Create a dedicated user for the service if it doesn't exist
-AGENT_USER="beszel"
-echo "Configuring the dedicated user for the Beszel Agent service..."
+AGENT_USER="anarchy-pulse"
+echo "Configuring the dedicated user for the Anarchy Pulse Agent service..."
 if is_alpine; then
-  if ! id -u beszel >/dev/null 2>&1; then
-    addgroup beszel
-    adduser -S -D -H -s /sbin/nologin -G beszel beszel
+  if ! id -u anarchy-pulse >/dev/null 2>&1; then
+    addgroup anarchy-pulse
+    adduser -S -D -H -s /sbin/nologin -G anarchy-pulse anarchy-pulse
   fi
   # Add the user to the docker group to allow access to the Docker socket if group docker exists
   if getent group docker >/dev/null 2>&1; then
-    echo "Adding beszel to docker group"
-    addgroup beszel docker
+    echo "Adding anarchy-pulse to docker group"
+    addgroup anarchy-pulse docker
   fi
   
 elif is_openwrt; then
-  # Create beszel group first if it doesn't exist (check /etc/group directly)
-  if ! grep -q "^beszel:" /etc/group >/dev/null 2>&1; then
-    echo "beszel:x:999:" >> /etc/group
+  # Create anarchy-pulse group first if it doesn't exist (check /etc/group directly)
+  if ! grep -q "^anarchy-pulse:" /etc/group >/dev/null 2>&1; then
+    echo "anarchy-pulse:x:999:" >> /etc/group
   fi
   
-  # Create beszel user if it doesn't exist (double-check to prevent duplicates)
-  if ! id -u beszel >/dev/null 2>&1 && ! grep -q "^beszel:" /etc/passwd >/dev/null 2>&1; then
-    echo "beszel:x:999:999::/nonexistent:/bin/false" >> /etc/passwd
+  # Create anarchy-pulse user if it doesn't exist (double-check to prevent duplicates)
+  if ! id -u anarchy-pulse >/dev/null 2>&1 && ! grep -q "^anarchy-pulse:" /etc/passwd >/dev/null 2>&1; then
+    echo "anarchy-pulse:x:999:999::/nonexistent:/bin/false" >> /etc/passwd
   fi
   
   # Add the user to the docker group if docker group exists and user is not already in it
   if grep -q "^docker:" /etc/group >/dev/null 2>&1; then
-    echo "Adding beszel to docker group"
-    # Check if beszel is already in docker group
-    if ! grep "^docker:" /etc/group | grep -q "beszel"; then
-      # Add beszel to docker group by modifying /etc/group
+    echo "Adding anarchy-pulse to docker group"
+    # Check if anarchy-pulse is already in docker group
+    if ! grep "^docker:" /etc/group | grep -q "anarchy-pulse"; then
+      # Add anarchy-pulse to docker group by modifying /etc/group
       # Handle both cases: group with existing members and group without members
       if grep "^docker:" /etc/group | grep -q ":.*:.*$"; then
         # Group has existing members, append with comma
-        sed -i 's/^docker:\([^:]*:[^:]*:\)\(.*\)$/docker:\1\2,beszel/' /etc/group
+        sed -i 's/^docker:\([^:]*:[^:]*:\)\(.*\)$/docker:\1\2,anarchy-pulse/' /etc/group
       else
         # Group has no members, just append
-        sed -i 's/^docker:\([^:]*:[^:]*:\)$/docker:\1beszel/' /etc/group
+        sed -i 's/^docker:\([^:]*:[^:]*:\)$/docker:\1anarchy-pulse/' /etc/group
       fi
     fi
   fi
@@ -599,36 +599,36 @@ elif is_freebsd; then
     echo "OPNsense detected: skipping user creation (using daemon user instead)"
     AGENT_USER="daemon"
   else
-    if ! id -u beszel >/dev/null 2>&1; then
-      pw user add beszel -d /nonexistent -s /usr/sbin/nologin -c "beszel user"
+    if ! id -u anarchy-pulse >/dev/null 2>&1; then
+      pw user add anarchy-pulse -d /nonexistent -s /usr/sbin/nologin -c "anarchy-pulse user"
     fi
     # Add the user to the wheel group to allow self-updates
     if pw group show wheel >/dev/null 2>&1; then
-      echo "Adding beszel to wheel group for self-updates"
-      pw group mod wheel -m beszel
+      echo "Adding anarchy-pulse to wheel group for self-updates"
+      pw group mod wheel -m anarchy-pulse
     fi
   fi
 
 else
-  if ! id -u beszel >/dev/null 2>&1; then
-    useradd --system --home-dir /nonexistent --shell /bin/false beszel
+  if ! id -u anarchy-pulse >/dev/null 2>&1; then
+    useradd --system --home-dir /nonexistent --shell /bin/false anarchy-pulse
   fi
   # Add the user to the docker group to allow access to the Docker socket if group docker exists
   if getent group docker >/dev/null 2>&1; then
-    echo "Adding beszel to docker group"
-    usermod -aG docker beszel
+    echo "Adding anarchy-pulse to docker group"
+    usermod -aG docker anarchy-pulse
   fi
   # Add the user to the disk group to allow access to disk devices if group disk exists
   if getent group disk >/dev/null 2>&1; then
-    echo "Adding beszel to disk group"
-    usermod -aG disk beszel
+    echo "Adding anarchy-pulse to disk group"
+    usermod -aG disk anarchy-pulse
   fi
 fi
 
-# Create the directory for the Beszel Agent
+# Create the directory for the Anarchy Pulse Agent
 
 if [ ! -d "$AGENT_DIR" ]; then
-  echo "Creating the directory for the Beszel Agent..."
+  echo "Creating the directory for the Anarchy Pulse Agent..."
   mkdir -p "$AGENT_DIR"
   chown "${AGENT_USER}:${AGENT_USER}" "$AGENT_DIR"
   chmod 755 "$AGENT_DIR"
@@ -638,21 +638,21 @@ if [ ! -d "$BIN_DIR" ]; then
   mkdir -p "$BIN_DIR"
 fi
 
-# Download and install the Beszel Agent
+# Download and install the Anarchy Pulse Agent
 
 OS=$(uname -s | sed -e 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/')
 ARCH=$(detect_architecture)
-FILE_NAME="beszel-agent_${OS}_${ARCH}.tar.gz"
+FILE_NAME="anarchy-pulse-agent_${OS}_${ARCH}.tar.gz"
 if [ "$OS" = "linux" ] && [ "$ARCH" = "amd64" ] && is_glibc; then
-  FILE_NAME="beszel-agent_${OS}_${ARCH}_glibc.tar.gz"
+  FILE_NAME="anarchy-pulse-agent_${OS}_${ARCH}_glibc.tar.gz"
 fi
 
 # Determine version to install
 if [ "$VERSION" = "latest" ]; then
-  INSTALL_VERSION=$(curl -s "https://get.beszel.dev/latest-version")
+  INSTALL_VERSION=$(curl -s "https://github.com/jt7777/anarchy-pulse/latest-version")
   if [ -z "$INSTALL_VERSION" ]; then
     # Fallback to GitHub API
-    API_RELEASE_URL="https://api.github.com/repos/henrygd/beszel/releases/latest"
+    API_RELEASE_URL="https://api.github.com/repos/jt7777/anarchy-pulse/releases/latest"
     INSTALL_VERSION=$(curl -s "$API_RELEASE_URL" | grep -o '"tag_name": "v[^"]*"' | cut -d'"' -f4 | tr -d 'v')
   fi
   if [ -z "$INSTALL_VERSION" ]; then
@@ -665,12 +665,12 @@ else
   INSTALL_VERSION=$(echo "$INSTALL_VERSION" | sed 's/^v//')
 fi
 
-echo "Downloading beszel-agent v${INSTALL_VERSION}..."
+echo "Downloading anarchy-pulse-agent v${INSTALL_VERSION}..."
 
 # Download checksums file
 TEMP_DIR=$(mktemp -d)
 cd "$TEMP_DIR" || exit 1
-CHECKSUM=$(curl -fsSL "$GITHUB_URL/henrygd/beszel/releases/download/v${INSTALL_VERSION}/beszel_${INSTALL_VERSION}_checksums.txt" | grep "$FILE_NAME" | cut -d' ' -f1)
+CHECKSUM=$(curl -fsSL "$GITHUB_URL/jt7777/anarchy-pulse/releases/download/v${INSTALL_VERSION}/anarchy-pulse_${INSTALL_VERSION}_checksums.txt" | grep "$FILE_NAME" | cut -d' ' -f1)
 if [ -z "$CHECKSUM" ] || ! echo "$CHECKSUM" | grep -qE "^[a-fA-F0-9]{64}$"; then
   echo "Failed to get checksum or invalid checksum format"
   echo "Try again with --mirror (or --mirror <url>) if GitHub is not reachable."
@@ -678,8 +678,8 @@ if [ -z "$CHECKSUM" ] || ! echo "$CHECKSUM" | grep -qE "^[a-fA-F0-9]{64}$"; then
   exit 1
 fi
 
-if ! curl -fL# --retry 3 --retry-delay 2 --connect-timeout 10 "$GITHUB_URL/henrygd/beszel/releases/download/v${INSTALL_VERSION}/$FILE_NAME" -o "$FILE_NAME"; then
-  echo "Failed to download the agent from $GITHUB_URL/henrygd/beszel/releases/download/v${INSTALL_VERSION}/$FILE_NAME"
+if ! curl -fL# --retry 3 --retry-delay 2 --connect-timeout 10 "$GITHUB_URL/jt7777/anarchy-pulse/releases/download/v${INSTALL_VERSION}/$FILE_NAME" -o "$FILE_NAME"; then
+  echo "Failed to download the agent from $GITHUB_URL/jt7777/anarchy-pulse/releases/download/v${INSTALL_VERSION}/$FILE_NAME"
   echo "Try again with --mirror (or --mirror <url>) if GitHub is not reachable."
   rm -rf "$TEMP_DIR"
   exit 1
@@ -698,13 +698,13 @@ if [ "$($CHECK_CMD "$FILE_NAME" | cut -d' ' -f1)" != "$CHECKSUM" ]; then
   exit 1
 fi
 
-if ! tar -xzf "$FILE_NAME" beszel-agent; then
+if ! tar -xzf "$FILE_NAME" anarchy-pulse-agent; then
   echo "Failed to extract the agent"
   rm -rf "$TEMP_DIR"
   exit 1
 fi
 
-if [ ! -s "$TEMP_DIR/beszel-agent" ]; then
+if [ ! -s "$TEMP_DIR/anarchy-pulse-agent" ]; then
   echo "Downloaded binary is missing or empty."
   rm -rf "$TEMP_DIR"
   exit 1
@@ -715,8 +715,8 @@ if [ -f "$BIN_PATH" ]; then
   cp "$BIN_PATH" "$BIN_PATH.bak"
 fi
 
-mv beszel-agent "$BIN_PATH"
-chown beszel:beszel "$BIN_PATH"
+mv anarchy-pulse-agent "$BIN_PATH"
+chown anarchy-pulse:anarchy-pulse "$BIN_PATH"
 chmod 755 "$BIN_PATH"
 
 # Set SELinux context if needed
@@ -743,22 +743,22 @@ detect_nvidia_devices() {
 
 # Modify service installation part, add Alpine check before systemd service creation
 if is_alpine; then
-  if [ ! -f /etc/init.d/beszel-agent ]; then
+  if [ ! -f /etc/init.d/anarchy-pulse-agent ]; then
     echo "Creating OpenRC service for Alpine Linux..."
-    cat >/etc/init.d/beszel-agent <<EOF
+    cat >/etc/init.d/anarchy-pulse-agent <<EOF
 #!/sbin/openrc-run
 
-name="beszel-agent"
-description="Beszel Agent Service"
+name="anarchy-pulse-agent"
+description="Anarchy Pulse Agent Service"
 command="$BIN_PATH"
-command_user="beszel"
+command_user="anarchy-pulse"
 command_background="yes"
 pidfile="/run/\${RC_SVCNAME}.pid"
-output_log="/var/log/beszel-agent.log"
-error_log="/var/log/beszel-agent.err"
+output_log="/var/log/anarchy-pulse-agent.log"
+error_log="/var/log/anarchy-pulse-agent.err"
 
 start_pre() {
-    checkpath -f -m 0644 -o beszel:beszel "\$output_log" "\$error_log"
+    checkpath -f -m 0644 -o anarchy-pulse:anarchy-pulse "\$output_log" "\$error_log"
 }
 
 export PORT="$PORT"
@@ -771,24 +771,24 @@ depend() {
     after firewall
 }
 EOF
-    chmod +x /etc/init.d/beszel-agent
-    rc-update add beszel-agent default
+    chmod +x /etc/init.d/anarchy-pulse-agent
+    rc-update add anarchy-pulse-agent default
   else
     echo "Alpine OpenRC service file already exists. Skipping creation."
   fi
 
   # Create log files with proper permissions
-  touch /var/log/beszel-agent.log /var/log/beszel-agent.err
-  chown beszel:beszel /var/log/beszel-agent.log /var/log/beszel-agent.err
+  touch /var/log/anarchy-pulse-agent.log /var/log/anarchy-pulse-agent.err
+  chown anarchy-pulse:anarchy-pulse /var/log/anarchy-pulse-agent.log /var/log/anarchy-pulse-agent.err
 
   # Start the service
-  rc-service beszel-agent restart
+  rc-service anarchy-pulse-agent restart
 
   # Check if service started successfully
   sleep 2
-  if ! rc-service beszel-agent status | grep -q "started"; then
-    echo "Error: The Beszel Agent service failed to start. Checking logs..."
-    tail -n 20 /var/log/beszel-agent.err
+  if ! rc-service anarchy-pulse-agent status | grep -q "started"; then
+    echo "Error: The Anarchy Pulse Agent service failed to start. Checking logs..."
+    tail -n 20 /var/log/anarchy-pulse-agent.err
     exit 1
   fi
 
@@ -798,15 +798,15 @@ EOF
   elif [ "$AUTO_UPDATE_FLAG" = "false" ]; then
     AUTO_UPDATE="n"
   else
-    printf "\nEnable automatic daily updates for beszel-agent? (y/n): "
+    printf "\nEnable automatic daily updates for anarchy-pulse-agent? (y/n): "
     read AUTO_UPDATE
   fi
   case "$AUTO_UPDATE" in
   [Yy]*)
-    echo "Setting up daily automatic updates for beszel-agent..."
+    echo "Setting up daily automatic updates for anarchy-pulse-agent..."
 
-    # Create cron job to run beszel-agent update command daily at midnight
-    if ! crontab -u root -l 2>/dev/null | grep -q "beszel-agent.*update"; then
+    # Create cron job to run anarchy-pulse-agent update command daily at midnight
+    if ! crontab -u root -l 2>/dev/null | grep -q "anarchy-pulse-agent.*update"; then
       (crontab -u root -l 2>/dev/null; echo "12 0 * * * $BIN_PATH update >/dev/null 2>&1") | crontab -u root -
     fi
 
@@ -815,16 +815,16 @@ EOF
   esac
 
   # Check service status
-  if ! rc-service beszel-agent status >/dev/null 2>&1; then
-    echo "Error: The Beszel Agent service is not running."
-    rc-service beszel-agent status
+  if ! rc-service anarchy-pulse-agent status >/dev/null 2>&1; then
+    echo "Error: The Anarchy Pulse Agent service is not running."
+    rc-service anarchy-pulse-agent status
     exit 1
   fi
 
 elif is_openwrt; then
-  if [ ! -f /etc/init.d/beszel-agent ]; then
+  if [ ! -f /etc/init.d/anarchy-pulse-agent ]; then
     echo "Creating procd init script service for OpenWRT..."
-    cat >/etc/init.d/beszel-agent <<EOF
+    cat >/etc/init.d/anarchy-pulse-agent <<EOF
 #!/bin/sh /etc/rc.common
 
 USE_PROCD=1
@@ -833,8 +833,8 @@ START=99
 start_service() {
     procd_open_instance
     procd_set_param command $BIN_PATH
-    procd_set_param user beszel
-    procd_set_param pidfile /var/run/beszel-agent.pid
+    procd_set_param user anarchy-pulse
+    procd_set_param pidfile /var/run/anarchy-pulse-agent.pid
     procd_set_param env PORT="$PORT" KEY="$KEY" TOKEN="$TOKEN" HUB_URL="$HUB_URL"
     procd_set_param respawn
     procd_set_param stdout 1
@@ -844,8 +844,8 @@ start_service() {
 
 # Extra command to trigger agent update
 EXTRA_COMMANDS="update restart"
-EXTRA_HELP="        update          Update the Beszel agent
-        restart         Restart the Beszel agent"
+EXTRA_HELP="        update          Update the Anarchy Pulse agent
+        restart         Restart the Anarchy Pulse agent"
 
 update() {
     $BIN_PATH update
@@ -853,14 +853,14 @@ update() {
 
 EOF
     # Enable the service
-    chmod +x /etc/init.d/beszel-agent
-    /etc/init.d/beszel-agent enable
+    chmod +x /etc/init.d/anarchy-pulse-agent
+    /etc/init.d/anarchy-pulse-agent enable
   else
     echo "OpenWRT init script already exists. Skipping creation."
   fi
 
   # Start the service
-  /etc/init.d/beszel-agent restart
+  /etc/init.d/anarchy-pulse-agent restart
 
   # Auto-update service for OpenWRT using a crontab job
   if [ "$AUTO_UPDATE_FLAG" = "true" ]; then
@@ -870,15 +870,15 @@ EOF
     AUTO_UPDATE="n"
     sleep 1 # give time for the service to start
   else
-    printf "\nEnable automatic daily updates for beszel-agent? (y/n): "
+    printf "\nEnable automatic daily updates for anarchy-pulse-agent? (y/n): "
     read AUTO_UPDATE
   fi
   case "$AUTO_UPDATE" in
   [Yy]*)
-    echo "Setting up daily automatic updates for beszel-agent..."
+    echo "Setting up daily automatic updates for anarchy-pulse-agent..."
 
-    if ! crontab -u root -l 2>/dev/null | grep -q "beszel-agent.*update"; then
-      (crontab -u root -l 2>/dev/null; echo "12 0 * * * /etc/init.d/beszel-agent update") | crontab -u root -
+    if ! crontab -u root -l 2>/dev/null | grep -q "anarchy-pulse-agent.*update"; then
+      (crontab -u root -l 2>/dev/null; echo "12 0 * * * /etc/init.d/anarchy-pulse-agent update") | crontab -u root -
     fi
 
     /etc/init.d/cron restart
@@ -888,9 +888,9 @@ EOF
   esac
 
   # Check service status
-  if ! /etc/init.d/beszel-agent running >/dev/null 2>&1; then
-    echo "Error: The Beszel Agent service is not running."
-    /etc/init.d/beszel-agent status
+  if ! /etc/init.d/anarchy-pulse-agent running >/dev/null 2>&1; then
+    echo "Error: The Anarchy Pulse Agent service is not running."
+    /etc/init.d/anarchy-pulse-agent status
     exit 1
   fi
 
@@ -915,26 +915,26 @@ EOF
   fi
   
   # Create the rc service file if it doesn't exist
-  if [ ! -f /usr/local/etc/rc.d/beszel-agent ]; then
+  if [ ! -f /usr/local/etc/rc.d/anarchy-pulse-agent ]; then
     echo "Creating FreeBSD rc service..."
-    generate_freebsd_rc_service > /usr/local/etc/rc.d/beszel-agent
+    generate_freebsd_rc_service > /usr/local/etc/rc.d/anarchy-pulse-agent
     # Set proper permissions for the rc script
-    chmod 755 /usr/local/etc/rc.d/beszel-agent
+    chmod 755 /usr/local/etc/rc.d/anarchy-pulse-agent
   else
     echo "FreeBSD rc service file already exists. Skipping creation."
   fi
 
   # Enable and start the service
   echo "Enabling and starting the agent service..."
-  sysrc beszel_agent_enable="YES"
-  sysrc beszel_agent_user="${AGENT_USER}"
-  service beszel-agent restart
+  sysrc anarchy_pulse_agent_enable="YES"
+  sysrc anarchy_pulse_agent_user="${AGENT_USER}"
+  service anarchy-pulse-agent restart
   
   # Check if service started successfully
   sleep 2
-  if ! service beszel-agent status | grep -q "is running"; then
-    echo "Error: The Beszel Agent service failed to start. Checking logs..."
-    tail -n 20 /var/log/beszel_agent.log
+  if ! service anarchy-pulse-agent status | grep -q "is running"; then
+    echo "Error: The Anarchy Pulse Agent service failed to start. Checking logs..."
+    tail -n 20 /var/log/anarchy_pulse_agent.log
     exit 1
   fi
 
@@ -944,41 +944,41 @@ EOF
   elif [ "$AUTO_UPDATE_FLAG" = "false" ]; then
     AUTO_UPDATE="n"
   else
-    printf "\nEnable automatic daily updates for beszel-agent? (y/n): "
+    printf "\nEnable automatic daily updates for anarchy-pulse-agent? (y/n): "
     read AUTO_UPDATE
   fi
   case "$AUTO_UPDATE" in
   [Yy]*)
-    echo "Setting up daily automatic updates for beszel-agent..."
+    echo "Setting up daily automatic updates for anarchy-pulse-agent..."
 
     # Create cron job in /etc/cron.d 
-    cat >/etc/cron.d/beszel-agent <<EOF
-# Beszel Agent daily update job
+    cat >/etc/cron.d/anarchy-pulse-agent <<EOF
+# Anarchy Pulse Agent daily update job
 12 0 * * * root $BIN_PATH update >/dev/null 2>&1
 EOF
-    chmod 644 /etc/cron.d/beszel-agent
+    chmod 644 /etc/cron.d/anarchy-pulse-agent
     printf "\nDaily updates have been enabled via /etc/cron.d.\n"
     ;;
   esac
 
   # Check service status
-  if ! service beszel-agent status >/dev/null 2>&1; then
-    echo "Error: The Beszel Agent service is not running."
-    service beszel-agent status
+  if ! service anarchy-pulse-agent status >/dev/null 2>&1; then
+    echo "Error: The Anarchy Pulse Agent service is not running."
+    service anarchy-pulse-agent status
     exit 1
   fi
 
 else
   # Original systemd service installation code
-  if [ ! -f /etc/systemd/system/beszel-agent.service ]; then
+  if [ ! -f /etc/systemd/system/anarchy-pulse-agent.service ]; then
     echo "Creating the systemd service for the agent..."
 
     # Detect NVIDIA devices and grant device permissions
     NVIDIA_DEVICES=$(detect_nvidia_devices)
 
-    cat >/etc/systemd/system/beszel-agent.service <<EOF
+    cat >/etc/systemd/system/anarchy-pulse-agent.service <<EOF
 [Unit]
-Description=Beszel Agent Service
+Description=Anarchy Pulse Agent Service
 Wants=network-online.target
 After=network-online.target
 
@@ -989,10 +989,10 @@ Environment="TOKEN=$TOKEN"
 Environment="HUB_URL=$HUB_URL"
 # Environment="EXTRA_FILESYSTEMS=sdb"
 ExecStart=$BIN_PATH
-User=beszel
+User=anarchy-pulse
 Restart=on-failure
 RestartSec=5
-StateDirectory=beszel-agent
+StateDirectory=anarchy-pulse-agent
 
 # Security/sandboxing settings
 KeyringMode=private
@@ -1017,8 +1017,8 @@ EOF
   # Load and start the service
   printf "\nLoading and starting the agent service...\n"
   systemctl daemon-reload
-  systemctl enable beszel-agent.service >/dev/null 2>&1
-  systemctl restart beszel-agent.service
+  systemctl enable anarchy-pulse-agent.service >/dev/null 2>&1
+  systemctl restart anarchy-pulse-agent.service
 
 
 
@@ -1030,18 +1030,18 @@ EOF
     AUTO_UPDATE="n"
     sleep 1 # give time for the service to start
   else
-    printf "\nEnable automatic daily updates for beszel-agent? (y/n): "
+    printf "\nEnable automatic daily updates for anarchy-pulse-agent? (y/n): "
     read AUTO_UPDATE
   fi
   case "$AUTO_UPDATE" in
   [Yy]*)
-    echo "Setting up daily automatic updates for beszel-agent..."
+    echo "Setting up daily automatic updates for anarchy-pulse-agent..."
 
     # Create systemd service for the daily update
-    cat >/etc/systemd/system/beszel-agent-update.service <<EOF
+    cat >/etc/systemd/system/anarchy-pulse-agent-update.service <<EOF
 [Unit]
-Description=Update beszel-agent if needed
-Wants=beszel-agent.service
+Description=Update anarchy-pulse-agent if needed
+Wants=anarchy-pulse-agent.service
 
 [Service]
 Type=oneshot
@@ -1049,9 +1049,9 @@ ExecStart=$BIN_PATH update
 EOF
 
     # Create systemd timer for the daily update
-    cat >/etc/systemd/system/beszel-agent-update.timer <<EOF
+    cat >/etc/systemd/system/anarchy-pulse-agent-update.timer <<EOF
 [Unit]
-Description=Run beszel-agent update daily
+Description=Run anarchy-pulse-agent update daily
 
 [Timer]
 OnCalendar=daily
@@ -1063,18 +1063,18 @@ WantedBy=timers.target
 EOF
 
     systemctl daemon-reload
-    systemctl enable --now beszel-agent-update.timer >/dev/null 2>&1
+    systemctl enable --now anarchy-pulse-agent-update.timer >/dev/null 2>&1
 
     printf "\nDaily updates have been enabled.\n"
     ;;
   esac
 
   # Wait for the service to start or fail
-  if [ "$(systemctl is-active beszel-agent.service)" != "active" ]; then
-    echo "Error: The Beszel Agent service is not running."
-    echo "$(systemctl status beszel-agent.service)"
+  if [ "$(systemctl is-active anarchy-pulse-agent.service)" != "active" ]; then
+    echo "Error: The Anarchy Pulse Agent service is not running."
+    echo "$(systemctl status anarchy-pulse-agent.service)"
     exit 1
   fi
 fi
 
-printf "\n\033[32mBeszel Agent has been installed successfully! It is now running on $PORT.\033[0m\n"
+printf "\n\033[32mAnarchy Pulse Agent has been installed successfully! It is now running on $PORT.\033[0m\n"

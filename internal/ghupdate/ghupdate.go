@@ -16,7 +16,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/henrygd/beszel"
+	"github.com/jt7777/anarchy-pulse"
 
 	"github.com/blang/semver"
 )
@@ -67,8 +67,8 @@ type Config struct {
 	// The data directory to use when fetching and downloading the latest release.
 	DataDir string
 
-	// UseMirror specifies whether to use the beszel.dev mirror instead of GitHub API.
-	// When false (default), always uses api.github.com. When true, uses gh.beszel.dev.
+	// UseMirror specifies whether to use the github.com/jt7777/anarchy-pulse mirror instead of GitHub API.
+	// When false (default), always uses api.github.com. When true, uses github.com/jt7777/anarchy-pulse.
 	UseMirror bool
 }
 
@@ -79,7 +79,7 @@ type updater struct {
 
 func Update(config Config) (updated bool, err error) {
 	p := &updater{
-		currentVersion: beszel.Version,
+		currentVersion: anarchy-pulse.Version,
 		config:         config,
 	}
 
@@ -98,7 +98,7 @@ func (p *updater) update() (updated bool, err error) {
 	}
 
 	if p.config.Repo == "" {
-		p.config.Repo = "beszel"
+		p.config.Repo = "anarchy-pulse"
 	}
 
 	if p.config.Context == nil {
@@ -135,7 +135,7 @@ func (p *updater) update() (updated bool, err error) {
 		return false, err
 	}
 
-	releaseDir := filepath.Join(p.config.DataDir, ".beszel_update")
+	releaseDir := filepath.Join(p.config.DataDir, ".anarchy_pulse_update")
 	defer os.RemoveAll(releaseDir)
 
 	ColorPrintf(ColorYellow, "Downloading %s...", asset.Name)
@@ -220,7 +220,7 @@ func (p *updater) update() (updated bool, err error) {
 
 func FetchLatestRelease(ctx context.Context, client HttpClient, url string) (*release, error) {
 	if url == "" {
-		url = getApiURL(false, "henrygd", "beszel")
+		url = getApiURL(false, "henrygd", "anarchy-pulse")
 	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -264,7 +264,7 @@ func downloadFile(
 	useMirror bool,
 ) error {
 	if useMirror {
-		url = strings.Replace(url, "github.com", "gh.beszel.dev", 1)
+		url = strings.Replace(url, "github.com", "github.com/jt7777/anarchy-pulse", 1)
 	}
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -339,7 +339,7 @@ func archiveSuffix(binaryName, goos, goarch string) string {
 		return fmt.Sprintf("%s_%s_%s.zip", binaryName, goos, goarch)
 	}
 	// Use glibc build for agent on glibc systems (includes NVML support via purego)
-	if binaryName == "beszel-agent" && goos == "linux" && goarch == "amd64" && isGlibc() {
+	if binaryName == "anarchy-pulse-agent" && goos == "linux" && goarch == "amd64" && isGlibc() {
 		return fmt.Sprintf("%s_%s_%s_glibc.tar.gz", binaryName, goos, goarch)
 	}
 	return fmt.Sprintf("%s_%s_%s.tar.gz", binaryName, goos, goarch)
@@ -370,7 +370,7 @@ func isGlibc() bool {
 
 func getApiURL(useMirror bool, owner, repo string) string {
 	if useMirror {
-		return fmt.Sprintf("https://gh.beszel.dev/repos/%s/%s/releases/latest?api=true", owner, repo)
+		return fmt.Sprintf("https://github.com/jt7777/anarchy-pulse/repos/%s/%s/releases/latest?api=true", owner, repo)
 	}
 	return fmt.Sprintf("https://api.github.com/repos/%s/%s/releases/latest", owner, repo)
 }

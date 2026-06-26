@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/henrygd/beszel/agent/utils"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/agent/utils"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 )
 
 var amdgpuNameCache = struct {
@@ -105,7 +105,7 @@ func (gm *GPUManager) updateAmdGpuData(cardPath string) bool {
 	usage, usageErr := readSysfsFloat(filepath.Join(devicePath, "gpu_busy_percent"))
 	memUsed, memUsedErr := readSysfsFloat(filepath.Join(devicePath, "mem_info_vram_used"))
 	memTotal, _ := readSysfsFloat(filepath.Join(devicePath, "mem_info_vram_total"))
-	// if gtt is present, add it to the memory used and total (https://github.com/henrygd/beszel/issues/1569#issuecomment-3837640484)
+	// if gtt is present, add it to the memory used and total (https://github.com/jt7777/anarchy-pulse/issues/1569#issuecomment-3837640484)
 	if gttUsed, err := readSysfsFloat(filepath.Join(devicePath, "mem_info_gtt_used")); err == nil && gttUsed > 0 {
 		if gttTotal, err := readSysfsFloat(filepath.Join(devicePath, "mem_info_gtt_total")); err == nil {
 			memUsed += gttUsed

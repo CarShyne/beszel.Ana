@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/henrygd/beszel/internal/entities/smart"
+	"github.com/jt7777/anarchy-pulse/internal/entities/smart"
 	"github.com/pocketbase/pocketbase/core"
 )
 

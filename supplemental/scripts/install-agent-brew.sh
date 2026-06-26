@@ -6,7 +6,7 @@ TOKEN=""
 HUB_URL=""
 
 usage() {
-  printf "Beszel Agent homebrew installation script\n\n"
+  printf "Anarchy Pulse Agent homebrew installation script\n\n"
   printf "Usage: ./install-agent-brew.sh [options]\n\n"
   printf "Options: \n"
   printf "  -k            SSH key (required, or interactive if not provided)\n"
@@ -72,27 +72,27 @@ fi
 
 # TOKEN and HUB_URL are optional for backwards compatibility - no interactive prompts
 
-mkdir -p ~/.config/beszel ~/.cache/beszel
+mkdir -p ~/.config/anarchy-pulse ~/.cache/anarchy-pulse
 
-echo "KEY=\"$KEY\"" >~/.config/beszel/beszel-agent.env
-echo "LISTEN=$PORT" >>~/.config/beszel/beszel-agent.env
+echo "KEY=\"$KEY\"" >~/.config/anarchy-pulse/anarchy-pulse-agent.env
+echo "LISTEN=$PORT" >>~/.config/anarchy-pulse/anarchy-pulse-agent.env
 
 if [ -n "$TOKEN" ]; then
-  echo "TOKEN=\"$TOKEN\"" >>~/.config/beszel/beszel-agent.env
+  echo "TOKEN=\"$TOKEN\"" >>~/.config/anarchy-pulse/anarchy-pulse-agent.env
 fi
 if [ -n "$HUB_URL" ]; then
-  echo "HUB_URL=\"$HUB_URL\"" >>~/.config/beszel/beszel-agent.env
+  echo "HUB_URL=\"$HUB_URL\"" >>~/.config/anarchy-pulse/anarchy-pulse-agent.env
 fi
 
-brew tap henrygd/beszel
-brew install beszel-agent
-brew services start beszel-agent
+brew tap jt7777/anarchy-pulse
+brew install anarchy-pulse-agent
+brew services start anarchy-pulse-agent
 
-printf "\nCheck status: brew services info beszel-agent\n"
-echo "Stop: brew services stop beszel-agent"
-echo "Start: brew services start beszel-agent"
-echo "Restart: brew services restart beszel-agent"
-echo "Upgrade: brew upgrade beszel-agent"
-echo "Uninstall: brew uninstall beszel-agent"
-echo "View logs in ~/.cache/beszel/beszel-agent.log"
-printf "Change environment variables in ~/.config/beszel/beszel-agent.env\n"
+printf "\nCheck status: brew services info anarchy-pulse-agent\n"
+echo "Stop: brew services stop anarchy-pulse-agent"
+echo "Start: brew services start anarchy-pulse-agent"
+echo "Restart: brew services restart anarchy-pulse-agent"
+echo "Upgrade: brew upgrade anarchy-pulse-agent"
+echo "Uninstall: brew uninstall anarchy-pulse-agent"
+echo "View logs in ~/.cache/anarchy-pulse/anarchy-pulse-agent.log"
+printf "Change environment variables in ~/.config/anarchy-pulse/anarchy-pulse-agent.env\n"

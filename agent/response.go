@@ -2,10 +2,10 @@ package agent
 
 import (
 	"github.com/fxamacker/cbor/v2"
-	"github.com/henrygd/beszel/internal/common"
-	"github.com/henrygd/beszel/internal/entities/smart"
-	"github.com/henrygd/beszel/internal/entities/system"
-	"github.com/henrygd/beszel/internal/entities/systemd"
+	"github.com/jt7777/anarchy-pulse/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/entities/smart"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/internal/entities/systemd"
 )
 
 // newAgentResponse creates an AgentResponse using legacy typed fields.

@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/henrygd/beszel/internal/hub/ws"
+	"github.com/jt7777/anarchy-pulse/internal/hub/ws"
 
-	"github.com/henrygd/beszel/internal/entities/system"
-	"github.com/henrygd/beszel/internal/hub/expirymap"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/internal/hub/expirymap"
 
-	"github.com/henrygd/beszel/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/common"
 
-	"github.com/henrygd/beszel"
+	"github.com/jt7777/anarchy-pulse"
 
 	"github.com/blang/semver"
 	"github.com/pocketbase/pocketbase/core"
@@ -347,7 +347,7 @@ func (sm *SystemManager) createSSHClientConfig() error {
 			MACs:         common.DefaultMACs,
 		},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-		ClientVersion:   fmt.Sprintf("SSH-2.0-%s_%s", beszel.AppName, beszel.Version),
+		ClientVersion:   fmt.Sprintf("SSH-2.0-%s_%s", anarchy-pulse.AppName, anarchy-pulse.Version),
 		Timeout:         sessionTimeout,
 	}
 	return nil

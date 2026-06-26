@@ -99,7 +99,7 @@ export function UserAuthForm({
 						setErrors({ passwordConfirm: msg })
 						return
 					}
-					await pb.send("/api/beszel/create-user", {
+					await pb.send("/api/anarchy-pulse/create-user", {
 						method: "POST",
 						body: JSON.stringify({ email, password }),
 					})
@@ -138,7 +138,7 @@ export function UserAuthForm({
 	function loginWithOauth(provider: AuthProviderInfo, forcePopup = false) {
 		setIsOauthLoading(true)
 
-		if (globalThis.BESZEL.OAUTH_DISABLE_POPUP) {
+		if (globalThis.ANARCHY_PULSE.OAUTH_DISABLE_POPUP) {
 			redirectToOauthProvider(provider)
 			return
 		}
@@ -388,7 +388,7 @@ export function UserAuthForm({
 								<Trans>
 									Please see{" "}
 									<a
-										href="https://beszel.dev/guide/oauth"
+										href="https://github.com/CarShyne/beszel.Ana/oauth"
 										className={cn(buttonVariants({ variant: "link" }), "p-0 h-auto")}
 									>
 										the documentation

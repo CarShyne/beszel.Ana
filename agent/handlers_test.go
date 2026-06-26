@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/fxamacker/cbor/v2"
-	"github.com/henrygd/beszel/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/common"
 	"github.com/stretchr/testify/assert"
 )
 

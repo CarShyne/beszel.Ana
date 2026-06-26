@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/henrygd/beszel/internal/records"
-	"github.com/henrygd/beszel/internal/tests"
+	"github.com/jt7777/anarchy-pulse/internal/records"
+	"github.com/jt7777/anarchy-pulse/internal/tests"
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"

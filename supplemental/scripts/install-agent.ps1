@@ -39,24 +39,24 @@ function Test-CommandExists {
     return (Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
-# Function to find beszel-agent in common installation locations
-function Find-BeszelAgent {
+# Function to find anarchy-pulse-agent in common installation locations
+function Find-Anarchy PulseAgent {
     # First check if it's in PATH
-    $agentCmd = Get-Command "beszel-agent" -ErrorAction SilentlyContinue
+    $agentCmd = Get-Command "anarchy-pulse-agent" -ErrorAction SilentlyContinue
     if ($agentCmd) {
         return $agentCmd.Source
     }
     
     # Common installation paths to check
     $commonPaths = @(
-        "$env:USERPROFILE\scoop\apps\beszel-agent\current\beszel-agent.exe",
-        "$env:ProgramData\scoop\apps\beszel-agent\current\beszel-agent.exe",
-        "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\henrygd.beszel-agent*\beszel-agent.exe",
-        "$env:ProgramFiles\WinGet\Packages\henrygd.beszel-agent*\beszel-agent.exe",
-        "${env:ProgramFiles(x86)}\WinGet\Packages\henrygd.beszel-agent*\beszel-agent.exe",
-        "$env:ProgramFiles\beszel-agent\beszel-agent.exe",
-        "$env:ProgramFiles(x86)\beszel-agent\beszel-agent.exe",
-        "$env:SystemDrive\Users\*\scoop\apps\beszel-agent\current\beszel-agent.exe"
+        "$env:USERPROFILE\scoop\apps\anarchy-pulse-agent\current\anarchy-pulse-agent.exe",
+        "$env:ProgramData\scoop\apps\anarchy-pulse-agent\current\anarchy-pulse-agent.exe",
+        "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\henrygd.anarchy-pulse-agent*\anarchy-pulse-agent.exe",
+        "$env:ProgramFiles\WinGet\Packages\henrygd.anarchy-pulse-agent*\anarchy-pulse-agent.exe",
+        "${env:ProgramFiles(x86)}\WinGet\Packages\henrygd.anarchy-pulse-agent*\anarchy-pulse-agent.exe",
+        "$env:ProgramFiles\anarchy-pulse-agent\anarchy-pulse-agent.exe",
+        "$env:ProgramFiles(x86)\anarchy-pulse-agent\anarchy-pulse-agent.exe",
+        "$env:SystemDrive\Users\*\scoop\apps\anarchy-pulse-agent\current\anarchy-pulse-agent.exe"
     )
     
     foreach ($path in $commonPaths) {
@@ -121,7 +121,7 @@ function Install-Scoop {
     
     # Check if running as admin - Scoop should not be installed as admin
     if (Test-Admin) {
-        throw "Scoop cannot be installed with administrator privileges. Please run this script as a regular user first to install Scoop and beszel-agent, then run as admin to configure the service."
+        throw "Scoop cannot be installed with administrator privileges. Please run this script as a regular user first to install Scoop and anarchy-pulse-agent, then run as admin to configure the service."
     }
     
     try {
@@ -182,31 +182,31 @@ function Install-NSSM {
     }
 }
 
-# Function to install beszel-agent with Scoop
-function Install-BeszelAgentWithScoop {
-    Write-Host "Adding beszel bucket..."
-    scoop bucket add beszel https://github.com/henrygd/beszel-scoops | Out-Null
+# Function to install anarchy-pulse-agent with Scoop
+function Install-Anarchy PulseAgentWithScoop {
+    Write-Host "Adding anarchy-pulse bucket..."
+    scoop bucket add anarchy-pulse https://github.com/jt7777/anarchy-pulse-scoops | Out-Null
     
-    Write-Host "Installing / updating beszel-agent..."
-    scoop install beszel-agent | Out-Null
+    Write-Host "Installing / updating anarchy-pulse-agent..."
+    scoop install anarchy-pulse-agent | Out-Null
     
-    if (-not (Test-CommandExists "beszel-agent")) {
-        throw "Failed to install beszel-agent"
+    if (-not (Test-CommandExists "anarchy-pulse-agent")) {
+        throw "Failed to install anarchy-pulse-agent"
     }
     
-    return $(Join-Path -Path $(scoop prefix beszel-agent) -ChildPath "beszel-agent.exe")
+    return $(Join-Path -Path $(scoop prefix anarchy-pulse-agent) -ChildPath "anarchy-pulse-agent.exe")
 }
 
-# Function to install beszel-agent with WinGet
-function Install-BeszelAgentWithWinGet {
-    Write-Host "Installing / updating beszel-agent..."
+# Function to install anarchy-pulse-agent with WinGet
+function Install-Anarchy PulseAgentWithWinGet {
+    Write-Host "Installing / updating anarchy-pulse-agent..."
     
     # Temporarily change ErrorActionPreference to allow WinGet to complete and show output
     $originalErrorActionPreference = $ErrorActionPreference
     $ErrorActionPreference = "Continue"
     
     # Use call operator (&) and capture exit code properly
-    & winget install --exact --id henrygd.beszel-agent --accept-source-agreements --accept-package-agreements | Out-Null
+    & winget install --exact --id henrygd.anarchy-pulse-agent --accept-source-agreements --accept-package-agreements | Out-Null
     $wingetExitCode = $LASTEXITCODE
     
     # Restore original ErrorActionPreference
@@ -223,14 +223,14 @@ function Install-BeszelAgentWithWinGet {
         Write-Host "WinGet exit code: $wingetExitCode" -ForegroundColor Yellow
     }
     
-    # Refresh PATH environment variable to make beszel-agent available in current session
+    # Refresh PATH environment variable to make anarchy-pulse-agent available in current session
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
     
-    # Find the path to the beszel-agent executable
-    $agentPath = (Get-Command beszel-agent -ErrorAction SilentlyContinue).Source
+    # Find the path to the anarchy-pulse-agent executable
+    $agentPath = (Get-Command anarchy-pulse-agent -ErrorAction SilentlyContinue).Source
     
     if (-not $agentPath) {
-        throw "Could not find beszel-agent executable path after installation"
+        throw "Could not find anarchy-pulse-agent executable path after installation"
     }
     
     return $agentPath
@@ -258,8 +258,8 @@ function Install-WithScoop {
         # Install NSSM
         Install-NSSM -Method "Scoop" | Out-Null
         
-        # Install beszel-agent
-        $agentPath = Install-BeszelAgentWithScoop
+        # Install anarchy-pulse-agent
+        $agentPath = Install-Anarchy PulseAgentWithScoop
         
         return $agentPath
     }
@@ -283,8 +283,8 @@ function Install-WithWinGet {
         # Install NSSM
         Install-NSSM -Method "WinGet" | Out-Null
         
-        # Install beszel-agent
-        $agentPath = Install-BeszelAgentWithWinGet
+        # Install anarchy-pulse-agent
+        $agentPath = Install-Anarchy PulseAgentWithWinGet
         
         return $agentPath
     }
@@ -315,7 +315,7 @@ function Install-NSSMService {
         [string]$NSSMPath = ""
     )
     
-    Write-Host "Installing beszel-agent service..."
+    Write-Host "Installing anarchy-pulse-agent service..."
     
     # Determine the NSSM executable to use
     $nssmCommand = "nssm"
@@ -327,13 +327,13 @@ function Install-NSSMService {
     }
     
     # Check if service already exists
-    $existingService = Get-Service -Name "beszel-agent" -ErrorAction SilentlyContinue
+    $existingService = Get-Service -Name "anarchy-pulse-agent" -ErrorAction SilentlyContinue
     if ($existingService) {
         Write-Host "Service already exists. Checking if path update is needed..."
         
         # Get current service path 
         try {
-            $currentPath = & $nssmCommand get beszel-agent Application
+            $currentPath = & $nssmCommand get anarchy-pulse-agent Application
             if ($LASTEXITCODE -eq 0 -and $currentPath.Trim() -eq $AgentPath) {
                 Write-Host "Service already configured with correct path. Skipping service recreation." -ForegroundColor Green
                 return
@@ -348,32 +348,32 @@ function Install-NSSMService {
         }
         
         try {
-            & $nssmCommand stop beszel-agent
-            & $nssmCommand remove beszel-agent confirm
+            & $nssmCommand stop anarchy-pulse-agent
+            & $nssmCommand remove anarchy-pulse-agent confirm
         } catch {
             Write-Host "Warning: Failed to remove existing service: $($_.Exception.Message)" -ForegroundColor Yellow
         }
     }
     
-    & $nssmCommand install beszel-agent $AgentPath
+    & $nssmCommand install anarchy-pulse-agent $AgentPath
     if ($LASTEXITCODE -ne 0) {
-        throw "Failed to install beszel-agent service"
+        throw "Failed to install anarchy-pulse-agent service"
     }
     
     Write-Host "Configuring service environment variables..."
-    & $nssmCommand set beszel-agent AppEnvironmentExtra "+KEY=$Key"
-    & $nssmCommand set beszel-agent AppEnvironmentExtra "+TOKEN=$Token"
-    & $nssmCommand set beszel-agent AppEnvironmentExtra "+HUB_URL=$HubUrl"
-    & $nssmCommand set beszel-agent AppEnvironmentExtra "+PORT=$Port"
+    & $nssmCommand set anarchy-pulse-agent AppEnvironmentExtra "+KEY=$Key"
+    & $nssmCommand set anarchy-pulse-agent AppEnvironmentExtra "+TOKEN=$Token"
+    & $nssmCommand set anarchy-pulse-agent AppEnvironmentExtra "+HUB_URL=$HubUrl"
+    & $nssmCommand set anarchy-pulse-agent AppEnvironmentExtra "+PORT=$Port"
     
     # Configure log files
-    $logDir = "$env:ProgramData\beszel-agent\logs"
+    $logDir = "$env:ProgramData\anarchy-pulse-agent\logs"
     if (-not (Test-Path $logDir)) {
         New-Item -ItemType Directory -Path $logDir -Force | Out-Null
     }
-    $logFile = "$logDir\beszel-agent.log"
-    & $nssmCommand set beszel-agent AppStdout $logFile
-    & $nssmCommand set beszel-agent AppStderr $logFile
+    $logFile = "$logDir\anarchy-pulse-agent.log"
+    & $nssmCommand set anarchy-pulse-agent AppStdout $logFile
+    & $nssmCommand set anarchy-pulse-agent AppStderr $logFile
 }
 
 # Function to configure firewall rules
@@ -384,7 +384,7 @@ function Configure-Firewall {
     )
     
     # Create a firewall rule if it doesn't exist
-    $ruleName = "Allow beszel-agent"
+    $ruleName = "Allow anarchy-pulse-agent"
     $existingRule = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
     
     # Remove existing rule if found
@@ -399,7 +399,7 @@ function Configure-Firewall {
     }
     
     # Create new rule with current settings
-    Write-Host "Creating firewall rule for beszel-agent on port $Port..."
+    Write-Host "Creating firewall rule for anarchy-pulse-agent on port $Port..."
     try {
         New-NetFirewallRule -DisplayName $ruleName -Direction Inbound -Action Allow -Protocol TCP -LocalPort $Port
         Write-Host "Firewall rule created successfully."
@@ -410,12 +410,12 @@ function Configure-Firewall {
 }
 
 # Function to start and monitor the service
-function Start-BeszelAgentService {
+function Start-Anarchy PulseAgentService {
     param (
         [string]$NSSMPath = ""
     )
     
-    Write-Host "Starting beszel-agent service..."
+    Write-Host "Starting anarchy-pulse-agent service..."
     
     # Determine the NSSM executable to use
     $nssmCommand = "nssm"
@@ -425,7 +425,7 @@ function Start-BeszelAgentService {
         throw "NSSM is not available in PATH and no valid NSSMPath was provided"
     }
     
-    & $nssmCommand start beszel-agent
+    & $nssmCommand start anarchy-pulse-agent
     $startResult = $LASTEXITCODE
     
     # Only enter the status check loop if the NSSM start command failed
@@ -442,11 +442,11 @@ function Start-BeszelAgentService {
             Start-Sleep -Seconds 1
             $elapsedTime += 1
 
-            $serviceStatus = & $nssmCommand status beszel-agent
+            $serviceStatus = & $nssmCommand status anarchy-pulse-agent
             
             if ($serviceStatus -eq "SERVICE_RUNNING") {
                 $serviceStarted = $true
-                Write-Host "Success! The beszel-agent service is now running." -ForegroundColor Green
+                Write-Host "Success! The anarchy-pulse-agent service is now running." -ForegroundColor Green
             }
             elseif ($serviceStatus -like "*PENDING*") {
                 Write-Host "Service is still starting (status: $serviceStatus)... waiting" -ForegroundColor Yellow
@@ -460,11 +460,11 @@ function Start-BeszelAgentService {
         
         if (-not $serviceStarted) {
             Write-Host "Service did not reach running state." -ForegroundColor Yellow
-            Write-Host "You can check status manually with 'nssm status beszel-agent'" -ForegroundColor Yellow
+            Write-Host "You can check status manually with 'nssm status anarchy-pulse-agent'" -ForegroundColor Yellow
         }
     } else {
         # NSSM start command was successful
-        Write-Host "Success! The beszel-agent service is running properly." -ForegroundColor Green
+        Write-Host "Success! The anarchy-pulse-agent service is running properly." -ForegroundColor Green
     }
 }
 
@@ -520,7 +520,7 @@ try {
     }
 
     if (-not $AgentPath) {
-        throw "Could not find beszel-agent executable. Make sure it was properly installed."
+        throw "Could not find anarchy-pulse-agent executable. Make sure it was properly installed."
     }
     
     # Find NSSM path if not already provided
@@ -567,8 +567,8 @@ try {
     # Second: If we need admin rights for service installation and we don't have them, relaunch
     if (-not $isAdmin -and -not $Elevated) {
         Write-Host "Admin privileges required for service installation. Relaunching as admin..." -ForegroundColor Yellow
-        Write-Host "Check service status with 'nssm status beszel-agent'"
-        Write-Host "Edit service configuration with 'nssm edit beszel-agent'"
+        Write-Host "Check service status with 'nssm status anarchy-pulse-agent'"
+        Write-Host "Edit service configuration with 'nssm edit anarchy-pulse-agent'"
         
         # Prepare arguments for the elevated script
         $argumentList = @(
@@ -610,7 +610,7 @@ try {
         }
         
         # Start the service
-        Start-BeszelAgentService -NSSMPath $NSSMPath
+        Start-Anarchy PulseAgentService -NSSMPath $NSSMPath
         
         # Pause to see results if this is an elevated window
         if ($Elevated) {

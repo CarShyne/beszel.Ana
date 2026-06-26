@@ -9,10 +9,10 @@ import (
 	"testing/synctest"
 	"time"
 
-	"github.com/henrygd/beszel/internal/entities/container"
-	"github.com/henrygd/beszel/internal/entities/system"
-	"github.com/henrygd/beszel/internal/hub/systems"
-	"github.com/henrygd/beszel/internal/tests"
+	"github.com/jt7777/anarchy-pulse/internal/entities/container"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse/internal/hub/systems"
+	"github.com/jt7777/anarchy-pulse/internal/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -464,8 +464,8 @@ func TestHasUser(t *testing.T) {
 		assert.True(t, sys.HasUser(hub, user2))
 	})
 
-	t.Run("BESZEL_HUB_SHARE_ALL_SYSTEMS=true grants access to non-member", func(t *testing.T) {
-		t.Setenv("BESZEL_HUB_SHARE_ALL_SYSTEMS", "true")
+	t.Run("ANARCHY_PULSE_HUB_SHARE_ALL_SYSTEMS=true grants access to non-member", func(t *testing.T) {
+		t.Setenv("ANARCHY_PULSE_HUB_SHARE_ALL_SYSTEMS", "true")
 		assert.True(t, sys.HasUser(hub, user2))
 	})
 

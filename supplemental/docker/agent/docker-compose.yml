@@ -1,19 +1,19 @@
 # Specialized images available for Nvidia / Intel GPUs
 #
-# Docs: https://beszel.dev/guide/agent-installation
-# Env vars: https://beszel.dev/guide/environment-variables
+# Docs: https://github.com/CarShyne/beszel.Ana/agent-installation
+# Env vars: https://github.com/CarShyne/beszel.Ana/environment-variables
 
 services:
-  beszel-agent:
-    image: henrygd/beszel-agent
-    container_name: beszel-agent
+  anarchy-pulse-agent:
+    image: jt7777/anarchy-pulse-agent
+    container_name: anarchy-pulse-agent
     restart: unless-stopped
     network_mode: host
     volumes:
-      - ./beszel_agent_data:/var/lib/beszel-agent
+      - ./anarchy_pulse_agent_data:/var/lib/anarchy-pulse-agent
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # monitor other disks / partitions by mounting a folder in /extra-filesystems
-      # - /mnt/disk1/.beszel:/extra-filesystems/disk1:ro
+      # - /mnt/disk1/.anarchy-pulse:/extra-filesystems/disk1:ro
     environment:
       LISTEN: 45876
       KEY: "<public key>"

@@ -1,7 +1,7 @@
-// Package agent implements the Beszel monitoring agent that collects and serves system metrics.
+// Package agent implements the Anarchy Pulse monitoring agent that collects and serves system metrics.
 //
 // The agent runs on monitored systems and communicates collected data
-// to the Beszel hub for centralized monitoring and alerting.
+// to the Anarchy Pulse hub for centralized monitoring and alerting.
 package agent
 
 import (
@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/gliderlabs/ssh"
-	"github.com/henrygd/beszel"
-	"github.com/henrygd/beszel/agent/deltatracker"
-	"github.com/henrygd/beszel/agent/utils"
-	"github.com/henrygd/beszel/internal/common"
-	"github.com/henrygd/beszel/internal/entities/system"
+	"github.com/jt7777/anarchy-pulse"
+	"github.com/jt7777/anarchy-pulse/agent/deltatracker"
+	"github.com/jt7777/anarchy-pulse/agent/utils"
+	"github.com/jt7777/anarchy-pulse/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/entities/system"
 	gossh "golang.org/x/crypto/ssh"
 )
 
@@ -97,7 +97,7 @@ func NewAgent(dataDir ...string) (agent *Agent, err error) {
 		}
 	}
 
-	slog.Debug(beszel.Version)
+	slog.Debug(anarchy-pulse.Version)
 
 	// initialize docker manager
 	agent.dockerManager = newDockerManager(agent)

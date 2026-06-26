@@ -3,7 +3,7 @@
 package hub
 
 import (
-	"github.com/henrygd/beszel/internal/hub/systems"
+	"github.com/jt7777/anarchy-pulse/internal/hub/systems"
 )
 
 // TESTING ONLY: GetSystemManager returns the system manager

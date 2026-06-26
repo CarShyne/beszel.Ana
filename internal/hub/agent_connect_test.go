@@ -14,9 +14,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/henrygd/beszel/agent"
-	"github.com/henrygd/beszel/internal/common"
-	"github.com/henrygd/beszel/internal/hub/ws"
+	"github.com/jt7777/anarchy-pulse/agent"
+	"github.com/jt7777/anarchy-pulse/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/hub/ws"
 
 	"github.com/pocketbase/pocketbase/core"
 	pbtests "github.com/pocketbase/pocketbase/tests"
@@ -97,7 +97,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "valid headers",
 			headers: http.Header{
 				"X-Token":  []string{"valid-token-123"},
-				"X-Beszel": []string{"0.5.0"},
+				"X-Anarchy Pulse": []string{"0.5.0"},
 			},
 			expectError:   false,
 			expectedToken: "valid-token-123",
@@ -106,7 +106,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 		{
 			name: "missing token",
 			headers: http.Header{
-				"X-Beszel": []string{"0.5.0"},
+				"X-Anarchy Pulse": []string{"0.5.0"},
 			},
 			expectError: true,
 		},
@@ -121,7 +121,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "empty token",
 			headers: http.Header{
 				"X-Token":  []string{""},
-				"X-Beszel": []string{"0.5.0"},
+				"X-Anarchy Pulse": []string{"0.5.0"},
 			},
 			expectError: true,
 		},
@@ -129,7 +129,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "empty agent version",
 			headers: http.Header{
 				"X-Token":  []string{"valid-token-123"},
-				"X-Beszel": []string{""},
+				"X-Anarchy Pulse": []string{""},
 			},
 			expectError: true,
 		},
@@ -137,7 +137,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "token too long",
 			headers: http.Header{
 				"X-Token":  []string{strings.Repeat("a", 65)},
-				"X-Beszel": []string{"0.5.0"},
+				"X-Anarchy Pulse": []string{"0.5.0"},
 			},
 			expectError: true,
 		},
@@ -554,7 +554,7 @@ func TestAgentConnect(t *testing.T) {
 		{
 			name: "missing token header",
 			headers: map[string]string{
-				"X-Beszel": "0.5.0",
+				"X-Anarchy Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusBadRequest,
 			description:    "Should fail due to missing token",
@@ -573,7 +573,7 @@ func TestAgentConnect(t *testing.T) {
 			name: "invalid token",
 			headers: map[string]string{
 				"X-Token":  "invalid-token",
-				"X-Beszel": "0.5.0",
+				"X-Anarchy Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusUnauthorized,
 			description:    "Should fail due to invalid token",
@@ -583,7 +583,7 @@ func TestAgentConnect(t *testing.T) {
 			name: "invalid agent version",
 			headers: map[string]string{
 				"X-Token":  testToken,
-				"X-Beszel": "0.5.0.0.0",
+				"X-Anarchy Pulse": "0.5.0.0.0",
 			},
 			expectedStatus: http.StatusUnauthorized,
 			description:    "Should fail due to invalid agent version",
@@ -593,7 +593,7 @@ func TestAgentConnect(t *testing.T) {
 			name: "valid headers but websocket upgrade will fail in test",
 			headers: map[string]string{
 				"X-Token":  testToken,
-				"X-Beszel": "0.5.0",
+				"X-Anarchy Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusInternalServerError,
 			description:    "Should pass validation but fail at WebSocket upgrade due to test limitations",
@@ -601,7 +601,7 @@ func TestAgentConnect(t *testing.T) {
 		},
 		{
 			name:           "Token too long",
-			headers:        map[string]string{"X-Token": strings.Repeat("a", 65), "X-Beszel": "0.5.0"},
+			headers:        map[string]string{"X-Token": strings.Repeat("a", 65), "X-Anarchy Pulse": "0.5.0"},
 			expectedStatus: http.StatusBadRequest,
 			description:    "Should reject token exceeding 64 characters",
 			errorMessage:   "",
@@ -610,7 +610,7 @@ func TestAgentConnect(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			req := httptest.NewRequest("GET", "/api/beszel/agent-connect", nil)
+			req := httptest.NewRequest("GET", "/api/anarchy-pulse/agent-connect", nil)
 			for key, value := range tc.headers {
 				req.Header.Set(key, value)
 			}
@@ -715,7 +715,7 @@ func TestHandleAgentConnect(t *testing.T) {
 			method: "GET",
 			headers: map[string]string{
 				"X-Token":  "invalid",
-				"X-Beszel": "0.5.0",
+				"X-Anarchy Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusUnauthorized,
 			description:    "Should reject invalid token",
@@ -725,7 +725,7 @@ func TestHandleAgentConnect(t *testing.T) {
 			method: "GET",
 			headers: map[string]string{
 				"X-Token":  testToken,
-				"X-Beszel": "0.5.0",
+				"X-Anarchy Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusInternalServerError, // WebSocket upgrade fails in test
 			description:    "Should pass validation but fail at WebSocket upgrade",
@@ -734,7 +734,7 @@ func TestHandleAgentConnect(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			req := httptest.NewRequest(tc.method, "/api/beszel/agent-connect", nil)
+			req := httptest.NewRequest(tc.method, "/api/anarchy-pulse/agent-connect", nil)
 			for key, value := range tc.headers {
 				req.Header.Set(key, value)
 			}
@@ -776,7 +776,7 @@ func TestAgentWebSocketIntegration(t *testing.T) {
 
 	// Create HTTP server with the actual API route
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/beszel/agent-connect" {
+		if r.URL.Path == "/api/anarchy-pulse/agent-connect" {
 			acr := &agentConnectRequest{
 				hub: hub,
 				req: r,
@@ -897,8 +897,8 @@ func TestAgentWebSocketIntegration(t *testing.T) {
 			require.NoError(t, err)
 
 			// Set up environment variables for the agent
-			t.Setenv("BESZEL_AGENT_HUB_URL", ts.URL)
-			t.Setenv("BESZEL_AGENT_TOKEN", tc.agentToken)
+			t.Setenv("ANARCHY_PULSE_AGENT_HUB_URL", ts.URL)
+			t.Setenv("ANARCHY_PULSE_AGENT_TOKEN", tc.agentToken)
 
 			// Start agent in background
 			done := make(chan error, 1)
@@ -1011,7 +1011,7 @@ func TestMultipleSystemsWithSameUniversalToken(t *testing.T) {
 
 	// Create HTTP server with the actual API route
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/beszel/agent-connect" {
+		if r.URL.Path == "/api/anarchy-pulse/agent-connect" {
 			acr := &agentConnectRequest{
 				hub: hub,
 				req: r,
@@ -1076,8 +1076,8 @@ func TestMultipleSystemsWithSameUniversalToken(t *testing.T) {
 			require.NoError(t, err)
 
 			// Set up environment variables for the agent
-			t.Setenv("BESZEL_AGENT_HUB_URL", ts.URL)
-			t.Setenv("BESZEL_AGENT_TOKEN", universalToken)
+			t.Setenv("ANARCHY_PULSE_AGENT_HUB_URL", ts.URL)
+			t.Setenv("ANARCHY_PULSE_AGENT_TOKEN", universalToken)
 
 			// Count systems before connection
 			systemsBefore, err := testApp.FindRecordsByFilter("systems", "users ~ {:userId}", "", -1, 0, map[string]any{"userId": userRecord.Id})
@@ -1213,7 +1213,7 @@ func TestPermanentUniversalTokenFromDB(t *testing.T) {
 
 	// Create HTTP server with the actual API route
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/beszel/agent-connect" {
+		if r.URL.Path == "/api/anarchy-pulse/agent-connect" {
 			acr := &agentConnectRequest{
 				hub: hub,
 				req: r,
@@ -1235,8 +1235,8 @@ func TestPermanentUniversalTokenFromDB(t *testing.T) {
 	require.NoError(t, err)
 
 	// Set up environment variables for the agent
-	t.Setenv("BESZEL_AGENT_HUB_URL", ts.URL)
-	t.Setenv("BESZEL_AGENT_TOKEN", universalToken)
+	t.Setenv("ANARCHY_PULSE_AGENT_HUB_URL", ts.URL)
+	t.Setenv("ANARCHY_PULSE_AGENT_TOKEN", universalToken)
 
 	// Start agent in background
 	done := make(chan error, 1)

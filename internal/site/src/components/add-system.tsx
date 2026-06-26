@@ -259,7 +259,7 @@ export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => 
 									},
 									{
 										text: t`Manual setup instructions`,
-										url: "https://beszel.dev/guide/agent-installation#binary",
+										url: "https://github.com/CarShyne/beszel.Ana/agent-installation#binary",
 										icons: [ExternalLinkIcon],
 									},
 								]}

@@ -6,10 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/henrygd/beszel"
-	"github.com/henrygd/beszel/agent"
-	"github.com/henrygd/beszel/agent/health"
-	"github.com/henrygd/beszel/agent/utils"
+	"github.com/jt7777/anarchy-pulse"
+	"github.com/jt7777/anarchy-pulse/agent"
+	"github.com/jt7777/anarchy-pulse/agent/health"
+	"github.com/jt7777/anarchy-pulse/agent/utils"
 	"github.com/spf13/pflag"
 	"golang.org/x/crypto/ssh"
 )
@@ -18,7 +18,7 @@ import (
 type cmdOptions struct {
 	key    string // key is the public key(s) for SSH authentication.
 	listen string // listen is the address or port to listen on.
-	hubURL string // hubURL is the URL of the Beszel hub.
+	hubURL string // hubURL is the URL of the Anarchy Pulse hub.
 	token  string // token is the token to use for authentication.
 }
 
@@ -47,9 +47,9 @@ func (opts *cmdOptions) parse() bool {
 	// pflag.CommandLine.ParseErrorsWhitelist.UnknownFlags = true
 	pflag.StringVarP(&opts.key, "key", "k", "", "Public key(s) for SSH authentication")
 	pflag.StringVarP(&opts.listen, "listen", "l", "", "Address or port to listen on")
-	pflag.StringVarP(&opts.hubURL, "url", "u", "", "URL of the Beszel hub")
+	pflag.StringVarP(&opts.hubURL, "url", "u", "", "URL of the Anarchy Pulse hub")
 	pflag.StringVarP(&opts.token, "token", "t", "", "Token to use for authentication")
-	chinaMirrors := pflag.BoolP("china-mirrors", "c", false, "Use mirror for update (gh.beszel.dev) instead of GitHub")
+	chinaMirrors := pflag.BoolP("china-mirrors", "c", false, "Use mirror for update (github.com/jt7777/anarchy-pulse) instead of GitHub")
 	version := pflag.BoolP("version", "v", false, "Show version information")
 	help := pflag.BoolP("help", "h", false, "Show this help message")
 
@@ -89,7 +89,7 @@ func (opts *cmdOptions) parse() bool {
 	// Must run after pflag.Parse()
 	switch {
 	case *version:
-		fmt.Println(beszel.AppName+"-agent", beszel.Version)
+		fmt.Println(anarchy-pulse.AppName+"-agent", anarchy-pulse.Version)
 		return true
 	case *help || subcommand == "help":
 		pflag.Usage()
@@ -124,7 +124,7 @@ func (opts *cmdOptions) loadPublicKeys() ([]ssh.PublicKey, error) {
 	// Try key file
 	keyFile, ok := utils.GetEnv("KEY_FILE")
 	if !ok {
-		return nil, fmt.Errorf("no key provided: must set -key flag, KEY env var, or KEY_FILE env var. Use 'beszel-agent help' for usage")
+		return nil, fmt.Errorf("no key provided: must set -key flag, KEY env var, or KEY_FILE env var. Use 'anarchy-pulse-agent help' for usage")
 	}
 
 	pubKey, err := os.ReadFile(keyFile)

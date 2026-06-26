@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/henrygd/beszel/internal/migrations"
+	"github.com/jt7777/anarchy-pulse/internal/migrations"
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
@@ -57,7 +57,7 @@ func (um *UserManager) InitializeUserSettings(e *core.RecordEvent) error {
 }
 
 // Custom API endpoint to create the first user.
-// Mimics previous default behavior in PocketBase < 0.23.0 allowing user to be created through the Beszel UI.
+// Mimics previous default behavior in PocketBase < 0.23.0 allowing user to be created through the Anarchy Pulse UI.
 func (um *UserManager) CreateFirstUser(e *core.RequestEvent) error {
 	// check that there are no users
 	totalUsers, err := um.app.CountRecords("users")

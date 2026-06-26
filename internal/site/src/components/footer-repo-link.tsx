@@ -9,7 +9,7 @@ export function FooterRepoLink() {
 	return (
 		<div className="flex gap-1.5 justify-end items-center pe-3 sm:pe-6 mt-3.5 mb-4 text-xs opacity-80">
 			<a
-				href="https://github.com/CarShyne/beszel.Ana"
+				href="https://github.com/jt7777/anarchy-pulse"
 				target="_blank"
 				className="flex items-center gap-0.5 text-muted-foreground hover:text-foreground duration-75"
 				rel="noopener"
@@ -23,7 +23,7 @@ export function FooterRepoLink() {
 				className="text-muted-foreground hover:text-foreground duration-75"
 				rel="noopener"
 			>
-				Anarchy Pulse {globalThis.BESZEL.HUB_VERSION}
+				Anarchy Pulse {globalThis.ANARCHY_PULSE.HUB_VERSION}
 			</a>
 			{newVersion?.v && (
 				<>

@@ -1,17 +1,17 @@
-# Docs: https://beszel.dev/guide/hub-installation
-# Env vars: https://beszel.dev/guide/environment-variables
+# Docs: https://github.com/CarShyne/beszel.Ana/hub-installation
+# Env vars: https://github.com/CarShyne/beszel.Ana/environment-variables
 
 services:
-  beszel:
-    image: "henrygd/beszel"
-    container_name: "beszel"
+  anarchy-pulse:
+    image: "jt7777/anarchy-pulse"
+    container_name: "anarchy-pulse"
     restart: unless-stopped
     ports:
       - "8090:8090"
     volumes:
-      - ./beszel_data:/beszel_data
+      - ./anarchy_pulse_data:/anarchy_pulse_data
     # healthcheck:
-    #   test: ['CMD', '/beszel', 'health', '--url', 'http://localhost:8090']
+    #   test: ['CMD', '/anarchy-pulse', 'health', '--url', 'http://localhost:8090']
     #   interval: 120s
     #   start_period: 10s
     #   timeout: 5s

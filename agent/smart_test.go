@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/henrygd/beszel/internal/entities/smart"
+	"github.com/jt7777/anarchy-pulse/internal/entities/smart"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

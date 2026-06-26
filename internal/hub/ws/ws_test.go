@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/blang/semver"
-	"github.com/henrygd/beszel/internal/common"
+	"github.com/jt7777/anarchy-pulse/internal/common"
 
 	"github.com/fxamacker/cbor/v2"
 	"github.com/stretchr/testify/assert"

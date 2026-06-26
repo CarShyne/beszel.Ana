@@ -5,7 +5,7 @@ package agent
 import (
 	"errors"
 
-	"github.com/henrygd/beszel/internal/entities/systemd"
+	"github.com/jt7777/anarchy-pulse/internal/entities/systemd"
 )
 
 // systemdManager manages the collection of systemd service statistics.

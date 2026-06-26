@@ -3,7 +3,7 @@ import { memo } from "react"
 import { copyToClipboard, getHubURL } from "@/lib/utils"
 import { DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu"
 
-// const isbeta = beszel.hub_version.includes("beta")
+// const isbeta = anarchy-pulse.hub_version.includes("beta")
 // const imagetag = isbeta ? ":edge" : ""
 
 /**
@@ -12,9 +12,9 @@ import { DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu"
  * @returns The URL for the script.
  */
 const getScriptUrl = (path: string = "") => {
-	return `https://get.beszel.dev${path}`
+	return `https://github.com/jt7777/anarchy-pulse${path}`
 	// no beta for now
-	// const url = new URL("https://get.beszel.dev")
+	// const url = new URL("https://github.com/jt7777/anarchy-pulse")
 	// url.pathname = path
 	// if (isBeta) {
 	// 	url.searchParams.set("beta", "1")
@@ -24,16 +24,16 @@ const getScriptUrl = (path: string = "") => {
 
 export function copyDockerCompose(port = "45876", publicKey: string, token: string) {
 	copyToClipboard(`services:
-  beszel-agent:
+  anarchy-pulse-agent:
     image: jt7777/anarchy-pulse
-    container_name: beszel-agent
+    container_name: anarchy-pulse-agent
     restart: unless-stopped
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./beszel_agent_data:/var/lib/beszel-agent
+      - ./anarchy_pulse_agent_data:/var/lib/anarchy-pulse-agent
       # monitor other disks / partitions by mounting a folder in /extra-filesystems
-      # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
+      # - /mnt/disk/.anarchy-pulse:/extra-filesystems/sda1:ro
     environment:
       LISTEN: ${port}
       KEY: '${publicKey}'
@@ -43,7 +43,7 @@ export function copyDockerCompose(port = "45876", publicKey: string, token: stri
 
 export function copyDockerRun(port = "45876", publicKey: string, token: string) {
 	copyToClipboard(
-		`docker run -d --name beszel-agent --network host --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock:ro -v beszel_agent_data:/var/lib/beszel-agent -e KEY="${publicKey}" -e LISTEN=${port} -e TOKEN="${token}" -e HUB_URL="${getHubURL()}" jt7777/anarchy-pulse`
+		`docker run -d --name anarchy-pulse-agent --network host --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock:ro -v anarchy_pulse_agent_data:/var/lib/anarchy-pulse-agent -e KEY="${publicKey}" -e LISTEN=${port} -e TOKEN="${token}" -e HUB_URL="${getHubURL()}" jt7777/anarchy-pulse`
 	)
 }
 
