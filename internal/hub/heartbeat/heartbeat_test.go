@@ -57,7 +57,7 @@ func TestSendGETDoesNotRequireAppOrDB(t *testing.T) {
 	app := newTestHub(t)
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
-		assert.Equal(t, "Anarchy Pulse-Heartbeat", r.Header.Get("User-Agent"))
+		assert.Equal(t, "Anarchy-Pulse-Heartbeat", r.Header.Get("User-Agent"))
 		w.WriteHeader(http.StatusOK)
 	}))
 	defer server.Close()
@@ -191,7 +191,7 @@ func TestSendPOSTBuildsExpectedStatuses(t *testing.T) {
 
 			req := <-captured
 			assert.Equal(t, http.MethodPost, req.method)
-			assert.Equal(t, "Anarchy Pulse-Heartbeat", req.userAgent)
+			assert.Equal(t, "Anarchy-Pulse-Heartbeat", req.userAgent)
 			assert.Equal(t, "application/json", req.contentType)
 
 			assert.Equal(t, tt.expectStatus, req.payload.Status)

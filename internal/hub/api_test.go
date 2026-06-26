@@ -877,7 +877,7 @@ func TestTrustedHeaderMiddleware(t *testing.T) {
 		}
 	}()
 
-	t.Setenv("TRUSTED_AUTH_HEADER", "X-Anarchy Pulse-Trusted")
+	t.Setenv("TRUSTED_AUTH_HEADER", "X-Anarchy-Pulse-Trusted")
 
 	testAppFactory := func(t testing.TB) *pbTests.TestApp {
 		hub, _ := anarchyPulseTests.NewTestHub(t.TempDir())
@@ -900,7 +900,7 @@ func TestTrustedHeaderMiddleware(t *testing.T) {
 			Method: http.MethodGet,
 			URL:    "/api/anarchy-pulse/getkey",
 			Headers: map[string]string{
-				"X-Anarchy Pulse-Trusted": "user@test.com",
+				"X-Anarchy-Pulse-Trusted": "user@test.com",
 			},
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
@@ -911,7 +911,7 @@ func TestTrustedHeaderMiddleware(t *testing.T) {
 			Method: http.MethodGet,
 			URL:    "/api/anarchy-pulse/getkey",
 			Headers: map[string]string{
-				"X-Anarchy Pulse-Trusted": "user@test.com",
+				"X-Anarchy-Pulse-Trusted": "user@test.com",
 			},
 			ExpectedStatus:  200,
 			ExpectedContent: []string{"\"key\":", "\"v\":"},

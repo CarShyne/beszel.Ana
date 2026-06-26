@@ -97,7 +97,7 @@ func NewAgent(dataDir ...string) (agent *Agent, err error) {
 		}
 	}
 
-	slog.Debug(anarchy-pulse.Version)
+	slog.Debug(anarchypulse.Version)
 
 	// initialize docker manager
 	agent.dockerManager = newDockerManager(agent)

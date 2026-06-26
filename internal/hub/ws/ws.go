@@ -142,7 +142,7 @@ func (ws *WsConn) handleAgentRequest(req *PendingRequest, handler ResponseHandle
 		data := message.Data.Bytes()
 
 		// Legacy format - unmarshal directly
-		if ws.agentVersion.LT(anarchy-pulse.MinVersionAgentResponse) {
+		if ws.agentVersion.LT(anarchypulse.MinVersionAgentResponse) {
 			return handler.HandleLegacy(data)
 		}
 

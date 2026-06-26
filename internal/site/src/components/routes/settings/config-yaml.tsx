@@ -21,7 +21,7 @@ export default function ConfigYaml() {
 	async function fetchConfig() {
 		try {
 			setIsLoading(true)
-			const { config } = await pb.send<{ config: string }>("/api/anarchy-pulse/config-yaml", {})
+			const { config } = await pb.send<{ config: string }>("/api/beszel/config-yaml", {})
 			setConfigContent(config)
 		} catch (error: any) {
 			toast({

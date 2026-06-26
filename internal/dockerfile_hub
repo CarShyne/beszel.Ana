@@ -1,31 +1,36 @@
+# Stage 1: build embedded web UI (required for //go:embed dist)
+FROM node:22-alpine AS web
+WORKDIR /web
+COPY internal/site/package.json internal/site/package-lock.json ./
+RUN npm ci
+COPY internal/site/ ./
+RUN npm run build
+
+# Stage 2: build hub binary
 FROM --platform=$BUILDPLATFORM golang:alpine AS builder
 
 WORKDIR /app
 
-# Download Go modules
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy source files
 COPY . ./
 
-RUN apk add --no-cache \
-    unzip \
-    ca-certificates
+# Embed frontend from stage 1
+COPY --from=web /web/dist ./internal/site/dist
 
+RUN apk add --no-cache unzip ca-certificates
 RUN update-ca-certificates
 
-# Build
 ARG TARGETOS TARGETARCH
-RUN CGO_ENABLED=0 GOGC=75 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags "-w -s" -o /anarchy-pulse ./internal/cmd/hub
+RUN CGO_ENABLED=0 GOGC=75 GOOS=$TARGETOS GOARCH=$TARGETARCH \
+    go build -ldflags "-w -s" -o /anarchy-pulse ./internal/cmd/hub
 
-# ? -------------------------
 FROM scratch
 
 COPY --from=builder /anarchy-pulse /
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-# Ensure data persistence across container recreations
 VOLUME ["/anarchy_pulse_data"]
 
 EXPOSE 8090

@@ -335,7 +335,7 @@ func TestShouldExitOnErr(t *testing.T) {
 		},
 		{
 			name:     "env var true, matching error with extra context",
-			err:      createDialErr("lookup anarchy-pulse.server.lan on [::1]:53: read udp [::1]:44557->[::1]:53: read: connection refused"),
+			err:      createDialErr("lookup anarchypulse.server.lan on [::1]:53: read udp [::1]:44557->[::1]:53: read: connection refused"),
 			envValue: "true",
 			expected: true,
 		},

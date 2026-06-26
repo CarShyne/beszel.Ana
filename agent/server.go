@@ -62,7 +62,7 @@ func (a *Agent) StartServer(opts ServerOptions) error {
 
 	// base config (limit to allowed algorithms)
 	config := &gossh.ServerConfig{
-		ServerVersion: fmt.Sprintf("SSH-2.0-%s_%s", anarchy-pulse.AppName, anarchy-pulse.Version),
+		ServerVersion: fmt.Sprintf("SSH-2.0-%s_%s", anarchypulse.AppName, anarchypulse.Version),
 	}
 	config.KeyExchanges = common.DefaultKeyExchanges
 	config.MACs = common.DefaultMACs
@@ -132,7 +132,7 @@ func (a *Agent) handleSession(s ssh.Session) {
 	hubVersion := a.getHubVersion(sessionID, sessionCtx)
 
 	// Legacy one-shot behavior for older hubs
-	if hubVersion.LT(anarchy-pulse.MinVersionAgentResponse) {
+	if hubVersion.LT(anarchypulse.MinVersionAgentResponse) {
 		if err := a.handleLegacyStats(s, hubVersion); err != nil {
 			slog.Error("Error encoding stats", "err", err)
 			s.Exit(1)
@@ -201,7 +201,7 @@ func (a *Agent) handleLegacyStats(w io.Writer, hubVersion semver.Version) error 
 // It chooses between CBOR and JSON encoding based on the hub version,
 // using CBOR for newer versions and JSON for legacy compatibility.
 func (a *Agent) writeToSession(w io.Writer, stats *system.CombinedData, hubVersion semver.Version) error {
-	if hubVersion.GTE(anarchy-pulse.MinVersionCbor) {
+	if hubVersion.GTE(anarchypulse.MinVersionCbor) {
 		return cbor.NewEncoder(w).Encode(stats)
 	}
 	return json.NewEncoder(w).Encode(stats)

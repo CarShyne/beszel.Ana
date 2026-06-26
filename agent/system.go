@@ -24,7 +24,7 @@ import (
 
 // Sets initial / non-changing values about the host system
 func (a *Agent) refreshSystemDetails() {
-	a.systemInfo.AgentVersion = anarchy-pulse.Version
+	a.systemInfo.AgentVersion = anarchypulse.Version
 
 	// get host info from Docker if available
 	var hostInfo container.HostInfo

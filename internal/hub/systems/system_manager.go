@@ -347,7 +347,7 @@ func (sm *SystemManager) createSSHClientConfig() error {
 			MACs:         common.DefaultMACs,
 		},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-		ClientVersion:   fmt.Sprintf("SSH-2.0-%s_%s", anarchy-pulse.AppName, anarchy-pulse.Version),
+		ClientVersion:   fmt.Sprintf("SSH-2.0-%s_%s", anarchypulse.AppName, anarchypulse.Version),
 		Timeout:         sessionTimeout,
 	}
 	return nil

@@ -98,10 +98,10 @@ export default function ForgotPassword() {
 						<Trans>Then log into the backend and reset your user account password in the users table.</Trans>
 					</p>
 					<code className="bg-muted rounded-sm py-0.5 px-2.5 me-auto text-sm">
-						./anarchy-pulse superuser upsert user@example.com password
+						./beszel superuser upsert user@example.com password
 					</code>
 					<code className="bg-muted rounded-sm py-0.5 px-2.5 me-auto text-sm">
-						docker exec anarchy-pulse /anarchy-pulse superuser upsert name@example.com password
+						docker exec beszel /beszel superuser upsert name@example.com password
 					</code>
 				</DialogContent>
 			</Dialog>

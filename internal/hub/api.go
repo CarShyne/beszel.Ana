@@ -146,7 +146,7 @@ func (h *Hub) getInfo(e *core.RequestEvent) error {
 	}
 	info := infoResponse{
 		Key:     h.pubKey,
-		Version: anarchy-pulse.Version,
+		Version: anarchypulse.Version,
 	}
 	if optIn, _ := utils.GetEnv("CHECK_UPDATES"); optIn == "true" {
 		info.CheckUpdate = true
@@ -164,7 +164,7 @@ func (info *UpdateInfo) getUpdate(e *core.RequestEvent) error {
 	if err != nil {
 		return err
 	}
-	currentVersion, err := semver.Parse(strings.TrimPrefix(anarchy-pulse.Version, "v"))
+	currentVersion, err := semver.Parse(strings.TrimPrefix(anarchypulse.Version, "v"))
 	if err != nil {
 		return err
 	}

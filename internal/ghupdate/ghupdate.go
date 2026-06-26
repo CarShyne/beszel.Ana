@@ -67,8 +67,7 @@ type Config struct {
 	// The data directory to use when fetching and downloading the latest release.
 	DataDir string
 
-	// UseMirror specifies whether to use the github.com/jt7777/anarchy-pulse mirror instead of GitHub API.
-	// When false (default), always uses api.github.com. When true, uses github.com/jt7777/anarchy-pulse.
+	// UseMirror uses github.com instead of api.github.com (china-mirrors flag).
 	UseMirror bool
 }
 
@@ -79,7 +78,7 @@ type updater struct {
 
 func Update(config Config) (updated bool, err error) {
 	p := &updater{
-		currentVersion: anarchy-pulse.Version,
+		currentVersion: anarchypulse.Version,
 		config:         config,
 	}
 
@@ -264,7 +263,7 @@ func downloadFile(
 	useMirror bool,
 ) error {
 	if useMirror {
-		url = strings.Replace(url, "github.com", "github.com/jt7777/anarchy-pulse", 1)
+		url = strings.Replace(url, "api.github.com", "github.com", 1)
 	}
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -370,7 +369,7 @@ func isGlibc() bool {
 
 func getApiURL(useMirror bool, owner, repo string) string {
 	if useMirror {
-		return fmt.Sprintf("https://github.com/jt7777/anarchy-pulse/repos/%s/%s/releases/latest?api=true", owner, repo)
+		return fmt.Sprintf("https://github.com/%s/%s/releases/latest", owner, repo)
 	}
 	return fmt.Sprintf("https://api.github.com/repos/%s/%s/releases/latest", owner, repo)
 }

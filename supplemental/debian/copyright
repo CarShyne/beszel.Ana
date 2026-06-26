@@ -1,5 +1,5 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: anarchy-pulse
+Upstream-Name: Anarchy Pulse
 Upstream-Contact: henrygd <hank@henrygd.me>
 Source: https://github.com/CarShyne/beszel.Ana
 Comment: Derived from Beszel (https://github.com/henrygd/beszel) by henrygd

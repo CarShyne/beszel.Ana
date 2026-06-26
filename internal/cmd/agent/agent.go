@@ -89,7 +89,7 @@ func (opts *cmdOptions) parse() bool {
 	// Must run after pflag.Parse()
 	switch {
 	case *version:
-		fmt.Println(anarchy-pulse.AppName+"-agent", anarchy-pulse.Version)
+		fmt.Println(anarchypulse.AppName+"-agent", anarchypulse.Version)
 		return true
 	case *help || subcommand == "help":
 		pflag.Usage()

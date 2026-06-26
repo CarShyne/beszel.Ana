@@ -116,7 +116,7 @@ func (client *WebSocketClient) getOptions() *gws.ClientOption {
 		RequestHeader: http.Header{
 			"User-Agent": []string{getUserAgent()},
 			"X-Token":    []string{client.token},
-			"X-Anarchy Pulse":   []string{anarchy-pulse.Version},
+			"X-Anarchy-Pulse":   []string{anarchypulse.Version},
 		},
 		NewDialer: func() (gws.Dialer, error) {
 			return proxy.FromEnvironment(), nil

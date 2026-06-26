@@ -564,7 +564,7 @@ func (sys *System) fetchDataViaSSH(options common.DataRequestOptions) (*system.C
 
 		*sys.data = system.CombinedData{}
 
-		if sys.agentVersion.GTE(anarchy-pulse.MinVersionAgentResponse) && stdinErr == nil {
+		if sys.agentVersion.GTE(anarchypulse.MinVersionAgentResponse) && stdinErr == nil {
 			req := common.HubRequest[any]{Action: common.GetData, Data: options}
 			_ = cbor.NewEncoder(stdin).Encode(req)
 			_ = stdin.Close()
@@ -580,7 +580,7 @@ func (sys *System) fetchDataViaSSH(options common.DataRequestOptions) (*system.C
 		}
 
 		var decodeErr error
-		if sys.agentVersion.GTE(anarchy-pulse.MinVersionCbor) {
+		if sys.agentVersion.GTE(anarchypulse.MinVersionCbor) {
 			decodeErr = cbor.NewDecoder(stdout).Decode(sys.data)
 		} else {
 			decodeErr = json.NewDecoder(stdout).Decode(sys.data)

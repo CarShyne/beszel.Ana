@@ -36,9 +36,9 @@ func TestGetAddress(t *testing.T) {
 		{
 			name: "use unix socket from flag",
 			opts: cmdOptions{
-				listen: "/tmp/anarchy-pulse.sock",
+				listen: "/tmp/anarchypulse.sock",
 			},
-			expected: "/tmp/anarchy-pulse.sock",
+			expected: "/tmp/anarchypulse.sock",
 		},
 		{
 			name: "use LISTEN env var",
@@ -62,9 +62,9 @@ func TestGetAddress(t *testing.T) {
 				listen: "",
 			},
 			envVars: map[string]string{
-				"LISTEN": "/tmp/anarchy-pulse.sock",
+				"LISTEN": "/tmp/anarchypulse.sock",
 			},
-			expected: "/tmp/anarchy-pulse.sock",
+			expected: "/tmp/anarchypulse.sock",
 		},
 		{
 			name: "flag takes precedence over env vars",
@@ -218,7 +218,7 @@ func TestGetNetwork(t *testing.T) {
 		},
 		{
 			name:     "unix network",
-			opts:     cmdOptions{listen: "/tmp/anarchy-pulse.sock"},
+			opts:     cmdOptions{listen: "/tmp/anarchypulse.sock"},
 			expected: "unix",
 		},
 		{

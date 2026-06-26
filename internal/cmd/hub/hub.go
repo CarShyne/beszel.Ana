@@ -39,16 +39,16 @@ func getBaseApp() *pocketbase.PocketBase {
 	isDev := os.Getenv("ENV") == "dev"
 
 	baseApp := pocketbase.NewWithConfig(pocketbase.Config{
-		DefaultDataDir: anarchy-pulse.AppName + "_data",
+		DefaultDataDir: anarchypulse.AppName + "_data",
 		DefaultDev:     isDev,
 	})
-	baseApp.RootCmd.Version = anarchy-pulse.Version
-	baseApp.RootCmd.Use = anarchy-pulse.AppName
+	baseApp.RootCmd.Version = anarchypulse.Version
+	baseApp.RootCmd.Use = anarchypulse.AppName
 	baseApp.RootCmd.Short = ""
 	// add update command
 	updateCmd := &cobra.Command{
 		Use:   "update",
-		Short: "Update " + anarchy-pulse.AppName + " to the latest version",
+		Short: "Update " + anarchypulse.AppName + " to the latest version",
 		Run:   hub.Update,
 	}
 	updateCmd.Flags().Bool("china-mirrors", false, "Use mirror (github.com/jt7777/anarchy-pulse) instead of GitHub")

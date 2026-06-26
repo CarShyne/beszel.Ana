@@ -41,7 +41,7 @@ func (t *WebSocketTransport) Request(ctx context.Context, action common.WebSocke
 		defer pendingReq.Cancel()
 
 		// Legacy agents (< MinVersionAgentResponse) respond with a raw payload instead of an AgentResponse wrapper.
-		if t.wsConn.AgentVersion().LT(anarchy-pulse.MinVersionAgentResponse) {
+		if t.wsConn.AgentVersion().LT(anarchypulse.MinVersionAgentResponse) {
 			return cbor.Unmarshal(message.Data.Bytes(), dest)
 		}
 

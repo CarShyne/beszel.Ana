@@ -175,7 +175,7 @@ func (hb *Heartbeat) send() error {
 		return err
 	}
 
-	req.Header.Set("User-Agent", "Anarchy Pulse-Heartbeat")
+	req.Header.Set("User-Agent", "Anarchy-Pulse-Heartbeat")
 
 	resp, err := hb.client.Do(req)
 	if err != nil {
@@ -282,7 +282,7 @@ func (hb *Heartbeat) buildPayload() (*Payload, error) {
 		Systems:   summary,
 		Down:      downSystems,
 		Alerts:    alerts,
-		Version:   anarchy-pulse.Version,
+		Version:   anarchypulse.Version,
 	}, nil
 }
 

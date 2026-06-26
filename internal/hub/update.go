@@ -59,10 +59,10 @@ func restartService() {
 	// Check if we're running as a service by looking for systemd
 	if _, err := exec.LookPath("systemctl"); err == nil {
 		// Check if anarchy-pulse service exists and is active
-		cmd := exec.Command("systemctl", "is-active", "anarchy-pulse.service")
+		cmd := exec.Command("systemctl", "is-active", "anarchypulse.service")
 		if err := cmd.Run(); err == nil {
 			ghupdate.ColorPrint(ghupdate.ColorYellow, "Restarting anarchy-pulse service...")
-			restartCmd := exec.Command("systemctl", "restart", "anarchy-pulse.service")
+			restartCmd := exec.Command("systemctl", "restart", "anarchypulse.service")
 			if err := restartCmd.Run(); err != nil {
 				ghupdate.ColorPrintf(ghupdate.ColorYellow, "Warning: Failed to restart service: %v\n", err)
 				ghupdate.ColorPrint(ghupdate.ColorYellow, "Please restart the service manually: sudo systemctl restart anarchy-pulse")

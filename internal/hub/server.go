@@ -32,7 +32,7 @@ func getPublicAppInfo(hub *Hub) PublicAppInfo {
 	parsedURL, _ := url.Parse(hub.appURL)
 	info := PublicAppInfo{
 		BASE_PATH:   strings.TrimSuffix(parsedURL.Path, "/") + "/",
-		HUB_VERSION: anarchy-pulse.Version,
+		HUB_VERSION: anarchypulse.Version,
 		HUB_URL:     hub.appURL,
 	}
 	if val, _ := utils.GetEnv("OAUTH_DISABLE_POPUP"); val == "true" {

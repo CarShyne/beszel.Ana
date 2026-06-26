@@ -97,7 +97,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "valid headers",
 			headers: http.Header{
 				"X-Token":  []string{"valid-token-123"},
-				"X-Anarchy Pulse": []string{"0.5.0"},
+				"X-Anarchy-Pulse": []string{"0.5.0"},
 			},
 			expectError:   false,
 			expectedToken: "valid-token-123",
@@ -106,7 +106,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 		{
 			name: "missing token",
 			headers: http.Header{
-				"X-Anarchy Pulse": []string{"0.5.0"},
+				"X-Anarchy-Pulse": []string{"0.5.0"},
 			},
 			expectError: true,
 		},
@@ -121,7 +121,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "empty token",
 			headers: http.Header{
 				"X-Token":  []string{""},
-				"X-Anarchy Pulse": []string{"0.5.0"},
+				"X-Anarchy-Pulse": []string{"0.5.0"},
 			},
 			expectError: true,
 		},
@@ -129,7 +129,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "empty agent version",
 			headers: http.Header{
 				"X-Token":  []string{"valid-token-123"},
-				"X-Anarchy Pulse": []string{""},
+				"X-Anarchy-Pulse": []string{""},
 			},
 			expectError: true,
 		},
@@ -137,7 +137,7 @@ func TestValidateAgentHeaders(t *testing.T) {
 			name: "token too long",
 			headers: http.Header{
 				"X-Token":  []string{strings.Repeat("a", 65)},
-				"X-Anarchy Pulse": []string{"0.5.0"},
+				"X-Anarchy-Pulse": []string{"0.5.0"},
 			},
 			expectError: true,
 		},
@@ -554,7 +554,7 @@ func TestAgentConnect(t *testing.T) {
 		{
 			name: "missing token header",
 			headers: map[string]string{
-				"X-Anarchy Pulse": "0.5.0",
+				"X-Anarchy-Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusBadRequest,
 			description:    "Should fail due to missing token",
@@ -573,7 +573,7 @@ func TestAgentConnect(t *testing.T) {
 			name: "invalid token",
 			headers: map[string]string{
 				"X-Token":  "invalid-token",
-				"X-Anarchy Pulse": "0.5.0",
+				"X-Anarchy-Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusUnauthorized,
 			description:    "Should fail due to invalid token",
@@ -583,7 +583,7 @@ func TestAgentConnect(t *testing.T) {
 			name: "invalid agent version",
 			headers: map[string]string{
 				"X-Token":  testToken,
-				"X-Anarchy Pulse": "0.5.0.0.0",
+				"X-Anarchy-Pulse": "0.5.0.0.0",
 			},
 			expectedStatus: http.StatusUnauthorized,
 			description:    "Should fail due to invalid agent version",
@@ -593,7 +593,7 @@ func TestAgentConnect(t *testing.T) {
 			name: "valid headers but websocket upgrade will fail in test",
 			headers: map[string]string{
 				"X-Token":  testToken,
-				"X-Anarchy Pulse": "0.5.0",
+				"X-Anarchy-Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusInternalServerError,
 			description:    "Should pass validation but fail at WebSocket upgrade due to test limitations",
@@ -601,7 +601,7 @@ func TestAgentConnect(t *testing.T) {
 		},
 		{
 			name:           "Token too long",
-			headers:        map[string]string{"X-Token": strings.Repeat("a", 65), "X-Anarchy Pulse": "0.5.0"},
+			headers:        map[string]string{"X-Token": strings.Repeat("a", 65), "X-Anarchy-Pulse": "0.5.0"},
 			expectedStatus: http.StatusBadRequest,
 			description:    "Should reject token exceeding 64 characters",
 			errorMessage:   "",
@@ -715,7 +715,7 @@ func TestHandleAgentConnect(t *testing.T) {
 			method: "GET",
 			headers: map[string]string{
 				"X-Token":  "invalid",
-				"X-Anarchy Pulse": "0.5.0",
+				"X-Anarchy-Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusUnauthorized,
 			description:    "Should reject invalid token",
@@ -725,7 +725,7 @@ func TestHandleAgentConnect(t *testing.T) {
 			method: "GET",
 			headers: map[string]string{
 				"X-Token":  testToken,
-				"X-Anarchy Pulse": "0.5.0",
+				"X-Anarchy-Pulse": "0.5.0",
 			},
 			expectedStatus: http.StatusInternalServerError, // WebSocket upgrade fails in test
 			description:    "Should pass validation but fail at WebSocket upgrade",

@@ -147,7 +147,7 @@ func TestWebSocketClient_GetOptions(t *testing.T) {
 
 			// Check headers
 			assert.Equal(t, "test-token", options.RequestHeader.Get("X-Token"))
-			assert.Equal(t, anarchy-pulse.Version, options.RequestHeader.Get("X-Anarchy Pulse"))
+			assert.Equal(t, anarchypulse.Version, options.RequestHeader.Get("X-Anarchy-Pulse"))
 			assert.Contains(t, options.RequestHeader.Get("User-Agent"), "Mozilla/5.0")
 
 			// Test options caching

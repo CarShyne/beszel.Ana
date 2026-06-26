@@ -1,6 +1,6 @@
 {
 	"name": "anarchy-pulse",
-	"description": "Anarchy Pulse — AnarchyAI-themed server monitoring fork of Anarchy Pulse",
+	"description": "Anarchy Pulse — AnarchyAI-themed server monitoring fork of Beszel",
 	"private": true,
 	"version": "0.18.7",
 	"type": "module",
