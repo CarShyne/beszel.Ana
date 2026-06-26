@@ -1,0 +1,196 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant light (&:is(.light *));
+@custom-variant dark (&:is(.dark *));
+@custom-variant safari (@supports (hanging-punctuation: first) and (-webkit-appearance: none));
+
+:root {
+	--background: hsl(0 0% 96%);
+	--foreground: hsl(0 0% 8%);
+	--card: hsl(0 0% 100%);
+	--card-foreground: hsl(0 0% 10%);
+	--popover: hsl(0 0% 100%);
+	--popover-foreground: hsl(0 0% 8%);
+	--primary: hsl(338 86% 47%);
+	--primary-foreground: hsl(0 0% 98%);
+	--secondary: hsl(0 5% 92%);
+	--secondary-foreground: hsl(0 0% 12%);
+	--muted: hsl(0 4% 92%);
+	--muted-foreground: hsl(0 2% 38%);
+	--accent: hsl(338 86% 47% / 0.1);
+	--accent-foreground: hsl(338 86% 40%);
+	--destructive: hsl(0 66% 53%);
+	--destructive-foreground: hsl(0 0% 97%);
+	--border: hsl(338 86% 47% / 0.22);
+	--input: hsl(0 4% 78%);
+	--ring: hsl(338 86% 47%);
+	--radius: 0.8rem;
+	--chart-1: hsl(338 86% 47%);
+	--chart-2: hsl(42 100% 50%);
+	--chart-3: hsl(142 69% 58%);
+	--chart-4: hsl(338 70% 60%);
+	--chart-5: hsl(42 80% 55%);
+	--table-header: hsl(0 4% 94%);
+	--chart-saturation: 65%;
+	--chart-lightness: 50%;
+	--container: 1500px;
+}
+
+.dark {
+	color-scheme: dark;
+	--background: hsl(0 0% 3%);
+	--foreground: hsl(0 0% 91%);
+	--card: hsl(0 5% 5%);
+	--card-foreground: hsl(0 0% 91%);
+	--popover: hsl(0 0% 3%);
+	--popover-foreground: hsl(0 0% 91%);
+	--primary: hsl(338 86% 47%);
+	--primary-foreground: hsl(0 0% 97%);
+	--secondary: hsl(0 5% 8%);
+	--secondary-foreground: hsl(0 0% 91%);
+	--muted: hsl(0 5% 10%);
+	--muted-foreground: hsl(0 0% 58%);
+	--accent: hsl(338 86% 47% / 0.15);
+	--accent-foreground: hsl(338 86% 62%);
+	--destructive: hsl(0 62% 46%);
+	--border: hsl(338 86% 47% / 0.22);
+	--input: hsl(0 5% 12%);
+	--ring: hsl(338 86% 47%);
+	--table-header: hsl(0 5% 6%);
+	--radius: 0.8rem;
+	--chart-1: hsl(338 86% 47%);
+	--chart-2: hsl(42 100% 50%);
+	--chart-3: hsl(142 69% 58%);
+	--chart-4: hsl(338 70% 60%);
+	--chart-5: hsl(42 80% 55%);
+	--chart-saturation: 60%;
+	--chart-lightness: 55%;
+}
+
+@theme inline {
+	--font-sans: "Share Tech Mono", Inter, InterVariable, monospace;
+
+	--breakpoint-xs: 26.6rem;
+	--breakpoint-450: 28rem;
+	--breakpoint-2xl: 90rem;
+
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+
+	--color-green-50: hsl(140 60% 95%);
+	--color-green-100: hsl(140 50% 90%);
+	--color-green-200: hsl(140 49% 80%);
+	--color-green-300: hsl(140 48% 70%);
+	--color-green-400: hsl(140 49% 60%);
+	--color-green-500: hsl(140 50% 48%);
+	--color-green-600: hsl(140 52% 38%);
+	--color-green-700: hsl(140 53% 29%);
+	--color-green-800: hsl(140 54% 20%);
+	--color-green-900: hsl(140 54% 12%);
+	--color-green-950: hsl(140 57% 6%);
+
+	--color-gh-dark: #080808;
+
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-table-header: var(--table-header);
+}
+
+@layer utilities {
+	/* Fonts */
+	@supports (font-variation-settings: normal) {
+		:root {
+			font-family: "Share Tech Mono", Inter, InterVariable, monospace;
+		}
+	}
+
+	@font-face {
+		font-family: InterVariable;
+		font-style: normal;
+		font-weight: 100 900;
+		font-display: swap;
+		src: url("/static/InterVariable.woff2?v=4.0") format("woff2");
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+		overflow-anchor: none;
+	}
+
+	body {
+		@apply bg-background text-foreground;
+		font-variant-ligatures: no-contextual;
+	}
+
+	button {
+		cursor: pointer;
+	}
+	
+	/* cosmetic patch for half pixel gap in table headers when scrolling content shows at top  */
+	thead.sticky:before {
+		content: "";
+		@apply absolute -top-2 left-0 w-full h-4 bg-table-header z-50	
+	}
+}
+
+@utility container {
+	max-width: var(--container);
+	@apply mx-auto px-4;
+}
+
+@utility link {
+	@apply text-primary font-medium underline-offset-4 hover:underline;
+}
+
+@utility ns-dialog {
+	/* New system dialog width */
+	min-width: 30.3rem;
+}
+
+@utility scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@utility text-card-title {
+	@apply text-[1.4rem] sm:text-2xl;
+}
+
+.recharts-tooltip-wrapper {
+	z-index: 51;
+	@apply tabular-nums;
+}
+
+.recharts-yAxis {
+	@apply tabular-nums;
+}
